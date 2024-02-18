@@ -28,7 +28,7 @@ https://templatemo.com/tm-580-woox-travel
 -->
 
   </head>
- {% block body %}
+
 <body>
 
   <!-- *** Preloader Start *** -->
@@ -59,14 +59,19 @@ https://templatemo.com/tm-580-woox-travel
                     </a>
                     <!-- *** Logo End *** -->
                     <!-- *** Menu Start *** -->
+                    {% block navbar %}
+                        
+                    
                     <ul class="nav">
                         <li><a href="#" class="active">Home</a></li>
                         <li><a href="#">Voyage</a></li>
-                        <li><a href="#">Go to Deals</a></li>
+                        <li><a href="{{ path('app_evenement_index') }}">Evenements</a></li>
                         <li><a href="#">Hebergement</a></li>
                         <li><a href="#">Review</a></li>
                         <li><a href="#">Login</a></li>
                     </ul>   
+
+                    {% endblock %}
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -245,7 +250,7 @@ https://templatemo.com/tm-580-woox-travel
   <!-- *** Main Banner Area End *** -->
   
  
-
+ {% block body %}
   <div class="call-to-action">
     <div class="container">
       <div class="row">

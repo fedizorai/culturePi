@@ -1,11 +1,25 @@
-{% extends 'base.html.twig' %}
+{% extends './dashboard/base.html.twig' %}
 
 {% block title %}New CategorieEvent{% endblock %}
 
 {% block body %}
-    <h1>Create new CategorieEvent</h1>
+
+ <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Create new CategorieEvent</h5>
+              <div class="card">
+                <div class="card-body">
 
     {{ include('categorie_event/_form.html.twig') }}
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 
     <a href="{{ path('app_categorie_event_index') }}">back to list</a>
 {% endblock %}

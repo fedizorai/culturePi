@@ -21,7 +21,7 @@ class Evenement
     private ?int $maxPlacesEvent = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateEvent = null;
+    private ?\DateTimeInterface $dateEvent ;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lieuEvent = null;
