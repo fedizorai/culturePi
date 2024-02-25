@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     {% block title %}
         <title>Culture vibes</title>
-        <link rel="shortcut icon" type="image/png" href="asset('assets/images/logo.png')" />
+        <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logo.png') }}">
     {% endblock %}
     {% block css %}
         <!-- Bootstrap core CSS -->
@@ -54,7 +54,7 @@ https://templatemo.com/tm-580-woox-travel
                 <nav class="main-nav">
                     <!-- *** Logo Start *** -->
                     <a href="#" class="logo">
-    <img src="asset('assets/images/logo.png')" alt="" style="width: 100px; height: 55px;">
+    <img src="{{ asset('assets/images/logo.png') }}" style="widht :100px ;height :55px;">
 </a>
                     </a>
                     <!-- *** Logo End *** -->

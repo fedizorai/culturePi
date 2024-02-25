@@ -23,4 +23,5 @@ class CategorieEventType extends AbstractType
             'data_class' => CategorieEvent::class,
         ]);
     }
+    
 }

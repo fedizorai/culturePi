@@ -3,35 +3,133 @@
 {% block title %}CategorieEvent index{% endblock %}
 
 {% block body %}
-    <h1>CategorieEvent index</h1>
+  <h1>CategorieEvent index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>DescriptionCategorieEvent</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for categorie_event in categorie_events %}
-            <tr>
-                <td>{{ categorie_event.id }}</td>
-                <td>{{ categorie_event.nom }}</td>
-                <td>{{ categorie_event.descriptionCategorieEvent }}</td>
-                <td>
-                    <a href="{{ path('app_categorie_event_show', {'id': categorie_event.id}) }}">show</a>
-                    <a href="{{ path('app_categorie_event_edit', {'id': categorie_event.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="col-lg-8 d-flex align-items-stretch">
+    <div class="card w-100">
+        <div class="card-body p-4">
+<h5 class="card-title fw-semibold mb-4 text-center">Les categories </h5>
+            <div class="d-flex justify-content-between mb-4">
+                <div>
+                    <table class="table text-nowrap mb-0 align-middle table-striped table-hover">
+                        <thead class="text-light fs-4" style="background-color: #3498db;">
+                            <tr>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Id</h6>
+                                </th>
 
-    <a href="{{ path('app_categorie_event_new') }}">Create new</a>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Name</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">DescriptionCategorieEvent</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Actions</h6>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for categorie_event in categorie_events %}
+                                <tr>
+                                    <td class="border-bottom-0">{{ categorie_event.id }}</td>
+                                    <td class="border-bottom-0">{{ categorie_event.nom }}</td>
+                                    <td class="border-bottom-0">{{ categorie_event.descriptionCategorieEvent }}</td>
+
+                                    <td>
+                                        <a href="{{ path('app_categorie_event_show', {'id': categorie_event.id}) }}" class="btn btn-info btn-sm">Show</a>
+                                        <a href="{{ path('app_categorie_event_edit', {'id': categorie_event.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4">Pas des evenements pour le moment disponible </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="my-4 d-flex align-items-center">
+                    <a href="{{ path('app_categorie_event_new') }}" class="btn btn-success">New</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="col-lg-8 d-flex align-items-stretch">
+    <div class="card w-100">
+        <div class="card-body p-4">
+            <h5 class="card-title fw-semibold mb-4 text-center">List Des evenments</h5>
+
+            <div class="d-flex justify-content-between mb-4">
+                <div>
+                    <table class="table text-nowrap mb-0 align-middle table-striped table-hover">
+                        <thead class="text-light fs-4" style="background-color: #3498db;">
+                            <tr>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Nom</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Lieu</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Date</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Max Places</h6>
+                                </th>
+
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Actions</h6>
+                                </th>
+                                
+                                <th>
+                                <button></button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for event in events %}
+                                <tr>
+                                    <td class="border-bottom-0">{{ event.nomEvent }}</td>
+                                    <td class="border-bottom-0">{{ event.lieuEvent }}</td>
+                                    <td class="border-bottom-0">{{ event.dateEvent ? event.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td class="border-bottom-0">{{ event.maxPlacesEvent }}</td>
+
+                                    <td>
+                                <td>
+                          
+                                
+                                </td>
+                                    
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">Pas des evenements pour le moment disponible </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+             <div>
+    </div>
+             </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
+

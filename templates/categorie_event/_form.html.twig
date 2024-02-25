@@ -1,30 +1,25 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'my-4 '}}) }}
 
-                    <div class="mb-3">
-                      {{  form_label ( form.nom,'nom categorie event' ,{ 'attr': {'class': 'form-label'}}) }}
-                        {{  form_widget ( form.nom ,{ 'attr': {'class': 'form-control'}}) }}
+<div class="mb-3">
+    {{ form_label(form.nom, 'Nom Categorie Event', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
 
-                        {% if form_errors(form.nom) is not empty  %}
-                            {{  form_errors( form.nom ,{ 'attr': {'class': 'text-danger'}}) }}
-                        {% else %}
+    {% if form_errors(form.nom) is not empty %}
+        <div class="text-danger">{{ form_errors(form.nom) }}</div>
+    {% endif %}
+</div>
 
-                        {% endif %}
-                    </div>
+<div class="mb-3">
+    {{ form_label(form.descriptionCategorieEvent, 'Description Categorie Event', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.descriptionCategorieEvent, {'attr': {'class': 'form-control'}}) }}
 
-                    <div class="mb-3">
-                      {{  form_label ( form.descriptionCategorieEvent,'description   categorie event' ,{ 'attr': {'class': 'form-label'}}) }}
-                        {{  form_widget ( form.descriptionCategorieEvent ,{ 'attr': {'class': 'form-control'}}) }}
+    {% if form_errors(form.descriptionCategorieEvent) is not empty %}
+        <div class="text-danger">{{ form_errors(form.descriptionCategorieEvent) }}</div>
+    {% endif %}
+</div>
 
-                        {% if form_errors(form.descriptionCategorieEvent) is not empty  %}
-                            {{  form_errors( form.descriptionCategorieEvent ,{ 'attr': {'class': 'text-danger'}}) }}
-                        {% else %}
+{{ form_widget(form) }}
 
-                        {% endif %}
-                    </div>
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
 
-                    
-
-                    
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

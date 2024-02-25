@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
@@ -18,6 +19,14 @@ class EvenementController extends AbstractController
     public function index(EvenementRepository $evenementRepository): Response
     {
         return $this->render('evenement/index.html.twig', [
+            'evenements' => $evenementRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/list', name: 'app_evenement_liste', methods: ['GET'])]
+    public function liste(EvenementRepository $evenementRepository): Response
+    {
+        return $this->render('evenement/liste.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
@@ -78,4 +87,8 @@ class EvenementController extends AbstractController
 
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
+
+   
+
+   
 }

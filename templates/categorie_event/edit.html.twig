@@ -3,11 +3,20 @@
 {% block title %}Edit CategorieEvent{% endblock %}
 
 {% block body %}
-    <h1>Edit CategorieEvent</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Edit CategorieEvent</h1>
 
-    {{ include('categorie_event/_form.html.twig', {'button_label': 'Update'}) }}
+       <div class="card">
+    <div class="card-body text-center"> <!-- Added text-center class to center the content -->
+        {{ include('categorie_event/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+</div>
 
-    <a href="{{ path('app_categorie_event_index') }}">back to list</a>
-
-    {{ include('categorie_event/_delete_form.html.twig') }}
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <a href="{{ path('app_categorie_event_index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i> Back to List
+            </a>
+            {{ include('categorie_event/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

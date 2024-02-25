@@ -3,14 +3,19 @@
 {% block title %}Evenement{% endblock %}
 
 {% block body %}
-    <h1>Evenement</h1>
+   <div style="text-align: center; margin-bottom: 40px;">
+    <h1 style="display: inline-block; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        <i class="fa fa-map"></i> Evenement Details
+    </h1>
+</div>
 
-    <table class="table">
+
+<div>
+
+
+    <table class="container">
+    
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ evenement.id }}</td>
-            </tr>
             <tr>
                 <th>NomEvent</th>
                 <td>{{ evenement.nomEvent }}</td>
@@ -29,10 +34,21 @@
             </tr>
         </tbody>
     </table>
+    
+</div>
+<div style="text-align: center;">
+    <div class="border-button" style="display: inline-block;">
+        <a href="{{ path('app_evenement_index') }}">Back to List</a>
+    </div>
 
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
+    <div class="border-button" style="display: inline-block;">
+        <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Edit</a>
+    </div>
+</div>
 
-    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
+   {{ include('evenement/_delete_form.html.twig') }}
 
-    {{ include('evenement/_delete_form.html.twig') }}
 {% endblock %}
+
+
+

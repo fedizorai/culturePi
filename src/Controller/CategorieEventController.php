@@ -6,6 +6,7 @@ use App\Entity\CategorieEvent;
 use App\Form\CategorieEventType;
 use App\Repository\CategorieEventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieEventController extends AbstractController
 {
     #[Route('/', name: 'app_categorie_event_index', methods: ['GET'])]
-    public function index(CategorieEventRepository $categorieEventRepository): Response
+    public function index(CategorieEventRepository $categorieEventRepository, EvenementRepository $evenementRepository): Response
     {
+        $categorieEvents = $categorieEventRepository->findAll();
+        $events = $evenementRepository->findAll(); // Fetch events here
+
         return $this->render('categorie_event/index.html.twig', [
-            'categorie_events' => $categorieEventRepository->findAll(),
+            'categorie_events' => $categorieEvents,
+            'events' => $events, // Pass events to the template
         ]);
     }
 
@@ -78,4 +83,10 @@ class CategorieEventController extends AbstractController
 
         return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+
+    
+
+
+  
 }

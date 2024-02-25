@@ -1,13 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Evenement{% endblock %}
+{% block title %}EDIT EVENEMENT{% endblock %}
+
+{% block navbar %}
+    <!-- Your navbar content goes here -->
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Evenement</h1>
+<div class="container">
+    <div class="text-center mb-4">
+        <h1 class="title-heading">
+            <i class="fa fa-map"></i> Evenement UPDATE
+        </h1>
+    </div>
 
-    {{ include('evenement/_form.html.twig', {'button_label': 'Update'}) }}
+    {# Start the form rendering #}
+    {{ form_start(form, {attr: {'class': 'reservation-form'}}) }}
 
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
+    {# Form field for 'nomEvent' with label and input element #}
+    <div class="form-group mb-3">
+        {{ form_label(form.nomEvent) }}
+        {{ form_widget(form.nomEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
-    {{ include('evenement/_delete_form.html.twig') }}
+    {# Form field for 'maxPlacesEvent' with label and input element #}
+    <div class="form-group mb-3">
+        {{ form_label(form.maxPlacesEvent) }}
+        {{ form_widget(form.maxPlacesEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {# Form field for 'dateEvent' with label and input element #}
+    <div class="form-group mb-3">
+        {{ form_label(form.dateEvent) }}
+        {{ form_widget(form.dateEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {# Form field for 'lieuEvent' with label and input element #}
+    <div class="form-group mb-3">
+        {{ form_label(form.lieuEvent) }}
+        {{ form_widget(form.lieuEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+     <div class="col-md-6">
+        <div class="mb-3">
+            {{ form_label(form.categorie, 'Catégories', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.categorie) is not empty %}
+                <div class="text-danger">{{ form_errors(form.categorie) }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="text-center">
+        <fieldset class="border-button rounded-circle p-3">
+            <button type="submit" class="btn btn-primary btn-lg">Update Evenement</button>
+        </fieldset>
+    </div>
+
+    {# End the form rendering #}
+    {{ form_end(form) }}
+</div>
 {% endblock %}

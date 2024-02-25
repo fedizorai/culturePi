@@ -2121,31 +2121,31 @@ Reservation Page Style
   margin-bottom: -6px;
 }
 
-.reservation-form #reservation-form h4 {
+.reservation-form  h4 {
   font-size: 30px;
   text-align: center;
   margin-bottom: 50px;
 }
 
-.reservation-form #reservation-form h4 em {
+.reservation-form  h4 em {
   font-style: normal;
   color: #22b3c1;
 }
 
-.reservation-form #reservation-form {
+.reservation-form  {
   padding: 60px 120px;
   background-color: #f9f9f9;
   border-bottom-right-radius: 23px;
   border-bottom-left-radius: 23px;
 }
 
-.reservation-form #reservation-form label {
+.reservation-form label {
   font-size: 15px;
   color: #afafaf;
 }
 
-.reservation-form #reservation-form input,
-.reservation-form #reservation-form select {
+.reservation-form  input,
+.reservation-form  select {
   width: 100%;
   height: 46px;
   background-color: transparent;
@@ -2156,11 +2156,11 @@ Reservation Page Style
   margin-bottom: 30px;
 }
 
-.reservation-form #reservation-form input.date {
+.reservation-form  input.date {
   color: #aaa;
 }
 
-.reservation-form #reservation-form button {
+.reservation-form  button {
   font-size: 14px;
   color: #fff;
   background-color: #22b3c1;
@@ -2178,7 +2178,7 @@ Reservation Page Style
   overflow: hidden;
 }
 
-.reservation-form #reservation-form button:hover {
+.reservation-form  button:hover {
   opacity: 0.8;
 }
 
@@ -2311,7 +2311,7 @@ body {
   .more-info .info-item {
     margin-bottom: 30px;
   }
-  .reservation-form #reservation-form {
+  .reservation-form  {
     padding: 45px 30px;
   }
 }
