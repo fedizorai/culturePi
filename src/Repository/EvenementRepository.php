@@ -20,6 +20,59 @@ class EvenementRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Evenement::class);
     }
+    public function SortByNomEvenement()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.nomEvent', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    
+public function SortBylieuEvenement()
+{
+    return $this->createQueryBuilder('e')
+        ->orderBy('e.lieuEvent','ASC')
+        ->getQuery()
+        ->getResult()
+        ;
+}
+
+public function SortByDateEvenement()
+{
+    return $this->createQueryBuilder('e')
+        ->orderBy('e.dateEvent','ASC')
+        ->getQuery()
+        ->getResult()
+        ;
+}
+
+    public function findByNomEvenement($nomEvenement)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.nomEvent LIKE :nomEvent')
+            ->setParameter('nomEvent', '%' . $nomEvenement . '%')
+            ->getQuery()
+            ->execute();
+    }
+
+    public function findBylieuEvenement( $lieuEvenement)
+{
+    return $this-> createQueryBuilder('e')
+        ->andWhere('e.lieuEvent LIKE :lieuEvent')
+        ->setParameter('lieuEvent','%' .$lieuEvenement. '%')
+        ->getQuery()
+        ->execute();
+}
+
+public function findByDateEvenement( $DateEvenement)
+{
+    return $this-> createQueryBuilder('e')
+        ->andWhere('e.dateEvent LIKE :dateEvent')
+        ->setParameter('categorie','%' .$DateEvenement. '%')
+        ->getQuery()
+        ->execute(); 
+}
 
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects

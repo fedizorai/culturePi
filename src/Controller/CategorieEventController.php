@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Evenement;
+
+
 
 #[Route('/categorie/event')]
 class CategorieEventController extends AbstractController
@@ -74,6 +77,7 @@ class CategorieEventController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_categorie_event_delete', methods: ['POST'])]
+    
     public function delete(Request $request, CategorieEvent $categorieEvent, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$categorieEvent->getId(), $request->request->get('_token'))) {
@@ -84,9 +88,7 @@ class CategorieEventController extends AbstractController
         return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
     }
     
-
     
 
 
-  
 }

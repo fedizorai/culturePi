@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CategorieEventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -88,7 +89,67 @@ class EvenementController extends AbstractController
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
 
-   
+    #[Route('/', name: 'app_evenement_indexx', methods: ['GET','POST'])]
+    public function indexx(EntityManagerInterface $entityManager,EvenementRepository $evenementRepository,Request $request): Response
+    {
+        $evenements = $entityManager
+        ->getRepository(Evenement::class)
+        ->findAll();
 
+        /////////
+        $back = null;
+        
+        if($request->isMethod("POST")){
+            if ( $request->request->get('optionsRadios')){
+                $SortKey = $request->request->get('optionsRadios');
+                switch ($SortKey){
+                    case 'nomEvent':
+                        $evenements = $evenementRepository->SortByNomEvenement();
+                        break;
+
+                        case 'lieuEvent':
+                            $evenements = $evenementRepository->SortBylieuEvenement();
+                            break;
+
+                            
+                    case 'dateEvent':
+                        $evenements = $evenementRepository->SortByDateEvenement();
+                        break;
+                        
+
+                }
+            }
+            else
+            {
+                $type = $request->request->get('optionsearch');
+                $value = $request->request->get('Search');
+                switch ($type){
+                    case 'nomEvent':
+                        $evenements = $evenementRepository->findBynomEvenement($value);
+                        break;
+
+                    case 'lieuEvent':
+                        $evenements = $evenementRepository->findBylieuEvenement($value);
+                        break;
+
+                    case 'dateEvent':
+                        $evenements = $evenementRepository->findByDateEvenement($value);
+                        break;
+
+
+                }
+            }
+            if ( $evenements){
+                $back = "success";
+            }else{
+                $back = "failure";
+            }
+        }
+            ////////
+
+    return $this->render('evenement/index.html.twig', [
+        'evenements' => $evenements,'back'=>$back
+    ]);
+    }
    
 }

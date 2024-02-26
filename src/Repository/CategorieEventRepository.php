@@ -6,6 +6,7 @@ use App\Entity\CategorieEvent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<CategorieEvent>
  *
@@ -20,7 +21,11 @@ class CategorieEventRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CategorieEvent::class);
     }
+   
 
+    }
+
+    
 //    /**
 //     * @return CategorieEvent[] Returns an array of CategorieEvent objects
 //     */
@@ -45,4 +50,4 @@ class CategorieEventRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+
