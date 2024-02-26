@@ -11,9 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as WriterXlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use PhpOffice\PhpSpreadsheet\IOStream;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
+
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
@@ -33,57 +34,50 @@ class ReservationController extends AbstractController
         ]);
     }
     #[Route('/export-to-excel', name: 'app_reservation_export_excel', methods: ['GET'])]
-public function exportToExcel(ReservationRepository $reservationRepository): Response
-{
-    // Get reservations from the database
-    $reservations = $reservationRepository->findAll();
-
-    // Create a new Spreadsheet
-    $spreadsheet = new Spreadsheet();
-
-    // Set the column headers
-    $spreadsheet->setActiveSheetIndex(0)
-        ->setCellValue('A1', 'ID')
-        ->setCellValue('B1', 'Number of Tickets')
-        ->setCellValue('C1', 'User ID')
-        ->setCellValue('D1', 'Payment')
-        ->setCellValue('E1', 'Voyage ID');
-
-    // Populate data from reservations
-    $row = 2;
-    foreach ($reservations as $reservation) {
-        $spreadsheet->getActiveSheet()
-            ->setCellValue('A' . $row, $reservation->getId())
-            ->setCellValue('B' . $row, $reservation->getNbrtickets())
-            ->setCellValue('C' . $row, $reservation->getIduser())
-            ->setCellValue('D' . $row, $reservation->getPaiement())
-            ->setCellValue('E' . $row, $reservation->getVoyage()->getId()); // Assuming Voyage has getId method
-
-        $row++;
+    public function exportToExcel(ReservationRepository $reservationRepository): Response
+    {
+        // Get reservations from the database
+        $reservations = $reservationRepository->findAll();
+    
+        // Create a new Spreadsheet
+        $spreadsheet = new Spreadsheet();
+    
+        // Set the column headers
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'ID')
+            ->setCellValue('B1', 'Number of Tickets')
+            ->setCellValue('C1', 'User ID')
+            ->setCellValue('D1', 'Payment')
+            ->setCellValue('E1', 'Voyage ID');
+    
+        // Populate data from reservations
+        $row = 2;
+        foreach ($reservations as $reservation) {
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('A' . $row, $reservation->getId())
+                ->setCellValue('B' . $row, $reservation->getNbrtickets())
+                ->setCellValue('C' . $row, $reservation->getIduser())
+                ->setCellValue('D' . $row, $reservation->getPaiement())
+                ->setCellValue('E' . $row, $reservation->getVoyage()->getTitle()); // Assuming Voyage has getId method
+    
+            $row++;
+        }
+    
+        // Create a response with a callback to generate the Excel file
+        $response = new StreamedResponse(function () use ($spreadsheet) {
+            // Set headers for streaming
+            $writer = new WriterXlsx($spreadsheet);
+            $writer->save('php://output');
+        });
+    
+        // Set headers for the response
+        $fileName = 'reservations_export_' . date('YmdHis') . '.xlsx';
+        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+        $response->headers->set('Cache-Control', 'max-age=0');
+    
+        return $response;
     }
-
-    // Create a response with a callback to generate the Excel file
-    $response = new StreamedResponse(function () use ($spreadsheet) {
-        // Set headers for streaming
-        $writer = new Xlsx($spreadsheet);
-        IOStream::setUseZip($writer);
-        IOStream::start($writer, 'php://output');
-
-        // Output the Excel file
-        $writer->save('php://output');
-
-        // Close the stream
-        IOStream::finish($writer);
-    });
-
-    // Set headers for the response
-    $fileName = 'reservations_export_' . date('YmdHis') . '.xlsx';
-    $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
-    $response->headers->set('Cache-Control', 'max-age=0');
-
-    return $response;
-}
     
     
 
