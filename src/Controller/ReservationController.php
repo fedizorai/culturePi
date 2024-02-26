@@ -22,6 +22,16 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    #[Route('/show', name: 'app_reservation_showres', methods: ['GET'])]
+    public function showres(ReservationRepository $reservationRepository): Response
+    {
+        return $this->render('reservation/show.html.twig', [
+            'reservations' => $reservationRepository->findAll(),
+        ]);
+    }
+    
+    
+
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
 public function new(Request $request, EntityManagerInterface $entityManager): Response
 {
@@ -87,7 +97,19 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
             $entityManager->remove($reservation);
             $entityManager->flush();
         }
-
+    
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}', name: 'app_reservation_deleteFe', methods: ['POST'])]
+    public function deleteFe(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($reservation);
+            $entityManager->flush();
+        }
+    
+        return $this->redirectToRoute('app_reservation_showres', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

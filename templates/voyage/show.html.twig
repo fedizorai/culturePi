@@ -26,14 +26,14 @@
             <a href="index.html" class="logo">
               <img src="{{ asset('images/logo.png') }}" alt="" style="width: 100px; height: 55px;">
             </a>
-            
+
             <ul class="nav">
               <li><a href="index.html">Home</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="deals.html" class="active">Deals</a></li>
-<li>
-    <a href="{{ path('app_reservation_new') }}">Reservation</a>
-</li>
+              <li>
+                <a href="{{ path('app_reservation_new') }}">Reservation</a>
+              </li>
               <li><a href="reservation.html">Book Yours</a></li>
             </ul>
             <a class='menu-trigger'>
@@ -55,17 +55,44 @@
       </div>
     </div>
   </div>
-
-  <div class="search-form">
+ <div class="search-form">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <!-- Add your search form here if needed -->
+          <form id="search-form" name="gs" method="submit" role="search" action="javascript:void(0);">
+            <div class="row">
+              <div class="col-lg-2">
+                <h4>Search By Location:</h4>
+              </div>
+              <div class="col-lg-4">
+                <fieldset>
+                  <input type="text" name="Location" class="form-control" placeholder="Enter Location" id="inputLocation">
+                </fieldset>
+              </div>
+              <div class="col-lg-4">
+                <fieldset>
+                  <select name="Price" class="form-select" aria-label="Default select example" id="choosePrice" onChange="searchVoyages()">
+                    <option selected>Price Range</option>
+                    <option value=100>$100 - $250</option>
+                    <option value="250-500">$250 - $500</option>
+                    <option value="500-1000">$500 - $1,000</option>
+                    <option value="1000-2500">$1,000 - $2,500</option>
+                    <option value="2500+">$2,500+</option>
+                  </select>
+                </fieldset>
+              </div>
+              <div class="col-lg-2">
+                <fieldset>
+                  <button class="border-button" type="button" onclick="searchVoyages()">Search Results</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-    
+
   <div class="amazing-deals">
     <div class="container">
       <div class="row">
@@ -75,16 +102,15 @@
             <p>Découvrez nos voyages économiques et premium à travers notre liste de voyages</p>
           </div>
         </div>
-
+      </div>
+      <div class="row" id="voyagesList">
         {% for voyage in voyages %}
         <div class="col-lg-6 col-sm-6">
           <div class="item">
             <div class="row">
               <div class="col-lg-6">
                 <div class="image">
-                  
                   <img src="{{ asset('voyageImages/' ~ voyage.voyageimage) }}" alt="{{ voyage.title }}">
-
                 </div>
               </div>
               <div class="col-lg-6 align-self-center">
@@ -94,17 +120,19 @@
                   <div class="row">
                     <div class="col-6">
                       <i class="fa fa-clock"></i>
-                      <span class="list">{{ voyage.duration }} Days</span>
+                      <span class="list">{{ voyage.duration }} Days</span>   
                     </div>
                     <div class="col-6">
                       <i class="fa fa-map"></i>
                       <span class="list">{{ voyage.location }}</span>
                     </div>
+                    
                   </div>
+                  <h6><i class="fa fa-dollar-sign"> {{ voyage.budget }}</i></h6>
                   <p>{{ voyage.description }}</p>
                   <div class="main-button">
-                    <a>Make a Reservation</a>
-                  </div>
+  <a style="color: #ffffff;">Make a Reservation</a>
+</div>
                 </div>
               </div>
             </div>
@@ -112,6 +140,11 @@
         </div>
         {% endfor %}
 
+          <div class="col-lg-12">
+           <ul class="page-numbers" id="pagination">
+           
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -142,7 +175,72 @@
   <script src="{{ asset('js/popup.js') }}"></script>
   <script src="{{ asset('js/custom.js') }}"></script>
 
- 
+ <script>
+    function searchVoyages() {
+      // Get the input values
+      var searchQuery = document.getElementById('inputLocation').value.toLowerCase();
+      var selectedPrice = document.getElementById('choosePrice').value;
+
+      // Get the list of voyages
+      var voyages = document.getElementById('voyagesList').getElementsByClassName('item');
+
+      // Loop through voyages and show/hide based on the search query and price
+      for (var i = 0; i < voyages.length; i++) {
+        var voyageTitle = voyages[i].getElementsByClassName('content')[0].getElementsByTagName('h4')[0].innerText.toLowerCase();
+        var voyageBudget = parseInt(voyages[i].getAttribute('budget')); // Assuming 'data-budget' attribute contains the budget value
+
+        // Check if the title includes the search query and the price is within the selected range
+        var isVisible = voyageTitle.includes(searchQuery) && (selectedPrice === "Price Range" || (selectedPrice === "2500+" && voyageBudget >= 2500) || (selectedPrice !== "2500+" && voyageBudget >= parseInt(selectedPrice.split('-')[0]) && voyageBudget <= parseInt(selectedPrice.split('-')[1])));
+
+        // Show/hide the voyage based on the search result
+        voyages[i].style.display = isVisible ? 'block' : 'none';
+      }
+    }
+     const voyagesPerPage = 4;
+    const totalVoyages = document.querySelectorAll('.item').length;
+    const totalPages = Math.ceil(totalVoyages / voyagesPerPage);
+
+    // Function to display voyages for the selected page
+    function showVoyages(pageNumber) {
+        $(".item").hide();
+        const startIndex = (pageNumber - 1) * voyagesPerPage;
+        const endIndex = startIndex + voyagesPerPage;
+        $(".item").slice(startIndex, endIndex).show();
+    }
+
+    // Function to generate pagination buttons
+    function generatePaginationButtons() {
+        $("#pagination").append(`<li><a href="#" class="page-number" data-page="prev"><i class="fa fa-arrow-left"></i></a></li>`);
+        for (let i = 1; i <= totalPages; i++) {
+            $("#pagination").append(`<li><a href="#" class="page-number">${i}</a></li>`);
+        }
+        $("#pagination").append(`<li><a href="#" class="page-number" data-page="next"><i class="fa fa-arrow-right"></i></a></li>`);
+    }
+
+    // Initial setup
+    generatePaginationButtons();
+    showVoyages(1); // Show the first page initially
+
+    // Handle click events on pagination buttons
+    $(".page-number").click(function (e) {
+        e.preventDefault();
+        const clickedPage = $(this).data("page");
+        if (clickedPage === "prev") {
+            const currentPage = $(".page-number.active").text();
+            if (currentPage > 1) {
+                showVoyages(parseInt(currentPage) - 1);
+            }
+        } else if (clickedPage === "next") {
+            const currentPage = $(".page-number.active").text();
+            if (currentPage < totalPages) {
+                showVoyages(parseInt(currentPage) + 1);
+            }
+        } else {
+            const pageNumber = parseInt($(this).text());
+            showVoyages(pageNumber);
+        }
+    });
+</script>
 
 </body>
 
