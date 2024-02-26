@@ -80,68 +80,65 @@ class ReservationController extends AbstractController
     
         return $response;
     }
-    #[Route('/import-excel', name: 'app_reservation_import_excel', methods: ['POST'])]
+
+    #[Route('/import', name: 'app_reservation_import_excel', methods: ['GET','POST'])]
     public function importExcel(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Handle the form submission
-        $form = $this->createFormBuilder()
-            ->add('file', FileType::class)
-            ->getForm();
+        // Check if a file is uploaded
+        $file = $request->files->get('file');
     
-        $form->handleRequest($request);
+        if ($file) {
+            // Create a new ReaderXlsx object
+            $reader = new ReaderXlsx();
+            $spreadsheet = $reader->load($file->getPathname());
+           /* try {
+                // Load the Excel file
+                
+            } catch (\PhpOffice\PhpSpreadsheet\Reader\Exception $e) {
+                // Handle exception (e.g., log, show an error message)
+                return new Response('Error loading the Excel file: ' . $e->getMessage(), Response::HTTP_BAD_REQUEST);
+            }*/
     
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Retrieve the uploaded file
-            $file = $form->get('file')->getData();
+            // Get the active sheet
+            $sheet = $spreadsheet->getActiveSheet();
     
-            // Check if a file is uploaded
-            if ($file) {
-                // Create a new Spreadsheet object
-                $spreadsheet = IOFactory::load($file);
+            // Get the entity manager (Note: This line is not needed as you already injected $entityManager)
     
-                // Get the active sheet
-                $sheet = $spreadsheet->getActiveSheet();
+            foreach ($sheet->getRowIterator(2) as $row) {
+                $rowData = $row->getWorksheet()->rangeToArray('A' . $row->getRowIndex() . ':' . 'E' . $row->getRowIndex(), null, true, false);
     
-                // Get the entity manager
-                $entityManager = $this->getDoctrine()->getManager();
+                // Assuming the columns in the Excel file are in the same order as in the export function
+                list($id, $nbrTickets, $userId, $payment, $voyageId) = $rowData[0];
     
-                foreach ($sheet->getRowIterator(2) as $row) {
-                    $rowData = $row->getWorksheet()->rangeToArray('A' . $row->getRowIndex() . ':' . 'E' . $row->getRowIndex(), null, true, false);
+                // Create a new Reservation entity
+                $reservation = new Reservation();
+                $reservation->setId($id);
+
+                $reservation->setNbrtickets($nbrTickets);
+                $reservation->setIduser($userId);
+                $reservation->setPaiement($payment);
     
-                    // Assuming the columns in the Excel file are in the same order as in the export function
-                    list($nbrTickets, $userId, $payment, $voyageId) = $rowData[0];
+                // Retrieve the associated Voyage from the database based on the Voyage ID
+                $voyage = $entityManager->getRepository(Voyage::class)->find($voyageId);
     
-                    // Create a new Reservation entity
-                    $reservation = new Reservation();
-                    $reservation->setNbrtickets($nbrTickets);
-                    $reservation->setIduser($userId);
-                    $reservation->setPaiement($payment);
+                if ($voyage) {
+                    $reservation->setVoyage($voyage);
     
-                    // Retrieve the associated Voyage from the database based on the Voyage ID
-                    $voyage = $entityManager->getRepository(Voyage::class)->find($voyageId);
-    
-                    if ($voyage) {
-                        $reservation->setVoyage($voyage);
-    
-                        // Persist the Reservation entity
-                        $entityManager->persist($reservation);
-                    }
+                    // Persist the Reservation entity
+                    $entityManager->persist($reservation);
                 }
-    
-                // Flush changes to the database
-                $entityManager->flush();
-    
-                // Redirect or do anything else you need after a successful import
-                return $this->redirectToRoute('app_reservation_showres');
             }
+    
+            // Flush changes to the database
+            $entityManager->flush();
+    
+            // Redirect or do anything else you need after a successful import
+            return $this->redirectToRoute('app_reservation_showres');
         }
     
-        // Render the form view if the form is not submitted or not valid
-        return $this->render('reservation/import_excel.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        // Render an error response or do anything else when no file is uploaded
+        return new Response('No file uploaded', Response::HTTP_BAD_REQUEST);
     }
-    
 
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
 public function new(Request $request, EntityManagerInterface $entityManager): Response
