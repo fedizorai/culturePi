@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Culture Vibes!</title>
+		<!-- Bootstrap core CSS -->
+		<link
+		href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+		<!-- Additional CSS Files -->
+		<link rel="stylesheet" href="{{asset('css/fontawesome.css')}}">
+		<link rel="stylesheet" href="{{asset('css/templatemo-woox-travel.css')}}">
+		<link rel="stylesheet" href="{{asset('css/owl.css')}}">
+		<link rel="stylesheet" href="{{asset('css/animate.css')}}">
+		<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css')}}"/>
+	</head>
+
+	<body>
+
+		<header class="header-area header-sticky">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<nav class="main-nav">
+							<a href="index.html" class="logo">
+								<img src="{{ asset('images/logo.png') }}" alt="" style="width: 100px; height: 55px;">
+							</a>
+							<ul class="nav">
+								<li>
+									<a href="index.html">Home</a>
+								</li>
+								<li>
+									<a href="about.html">About</a>
+								</li>
+<li>
+    <a href="{{ path('app_voyage_index') }}">Deals</a>
+</li>
+								<li>
+									<a href="reservation.html" class="active">Reservation</a>
+								</li>
+								<li>
+									<a href="reservation.html">Book Yours</a>
+								</li>
+							</ul>
+							<a class='menu-trigger'>
+								<span>Menu</span>
+							</a>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="second-page-heading">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<h4>Réservez votre offre préférée ici</h4>
+						<h2>Faites votre réservation</h2>
+						<p>Make Your Reservation, Make your reservation ,Make your reservation</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="more-info reservation-info">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-sm-6">
+						<div class="info-item">
+							<i class="fa fa-phone"></i>
+							<h4>Passer un appel
+							</h4>
+							<a href="#">+123 456 789 (0)</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="info-item">
+							<i class="fa fa-envelope"></i>
+							<h4>Nous contacter par courriel</h4>
+							<a href="#">company@email.com</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="info-item">
+							<i class="fa fa-map-marker"></i>
+							<h4>Visitez nos bureaux</h4>
+							<a href="#">24th Street North Avenue London, UK</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+			<div class="reservation-form">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-lg-12">
+							<form id="reservation-form" method="post" action="{{ path('app_reservation_new') }}">
+								{{ form_start(form) }}
+								<div class="row">
+									<div class="col-lg-6">
+										<fieldset>
+                                            <label for="Name" class="form-label">Nombre de place</label>
+											{{ form_widget(form.nbrtickets, {'attr': {'class': 'Number'}}) }}
+                                            {{ form_errors(form.nbrtickets) }}
+										</fieldset>
+									</div>
+									<div class="col-lg-6">
+										<fieldset>
+                                            <label for="Name" class="form-label">Utilisateur</label>
+											{{ form_widget(form.iduser, {'attr': {'class': 'Number'}}) }}
+                                             {{ form_errors(form.iduser) }}
+										</fieldset>
+									</div>
+									<div class="col-lg-6">
+										<fieldset>
+                                            <label for="Name" class="form-label">Type de paiement</label>
+											{{ form_widget(form.paiement, {'attr': {'class': 'Name'}}) }}
+                                             {{ form_errors(form.paiement) }}
+										</fieldset>
+									</div>
+									<div class="col-lg-6">
+										<fieldset>
+                                             <label for="Name" class="form-label">Voyage</label>
+											{{ form_widget(form.Voyage, {'attr': {'class': 'form-select'}}) }}
+											{{ form_errors(form.Voyage) }}
+										</fieldset>
+									</div>
+									<div class="col-lg-12">
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</div>
+								</div>
+								{{ form_end(form) }}
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Scripts -->
+			<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+			<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+			<script src="{{ asset('js/isotope.min.js') }}"></script>
+			<script src="{{ asset('js/owl-carousel.js') }}"></script>
+			<script src="{{ asset('js/wow.js') }}"></script>
+			<script src="{{ asset('js/tabs.js') }}"></script>
+			<script src="{{ asset('js/popup.js') }}"></script>
+			<script src="{{ asset('js/custom.js') }}"></script>
+		</body>
+       
+	</body>
+</html>
