@@ -14,9 +14,19 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as WriterXlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Entity\Voyage;
+
+//QR CODE
+use Endroid\QrCode\Builder\QrBuilder;
+use Endroid\QrCode\ErrorCorrectionLevel\High;
+use Endroid\QrCode\Label\Alignment\Center;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
+//
+
+
+
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
@@ -220,6 +230,43 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    
+    #[Route('/qrcode', name: 'qrcodegenerate', methods: ['GET','POST'])]
+    public function generateQRCode($reservationId)
+    {
+        // 1. Get reservation data
+        $reservation = $this->getDoctrine()->getRepository(Reservation::class)->find($reservationId);
+
+        if (!$reservation) {
+            throw $this->createNotFoundException('Reservation not found');
+        }
+
+        // 2. Generate data to encode
+        $qrCodeData = "Reservation ID: {$reservation->getId()}\n" .
+              "Number of Tickets: {$reservation->getNbrtickets()}\n" .
+              "Payment Method: {$reservation->getPaiement()}\n" .
+              "Voyage Details:\n" .
+              "  - Title: {$reservation->getVoyage()->getTitle()}\n" .  // Assuming Voyage has a `getTitle` method
+              "  - Location: {$reservation->getVoyage()->getLocation()}\n" . // Assuming Voyage has a `getLocation` method
+              "  - Date: {$reservation->getVoyage()->getDate()}\n" .  // Assuming Voyage has a `getDate` method (format as needed)
+              // ...Add more reservation details as needed
+
+        // 3. Create the QR Code object
+        $result = QrBuilder::create()
+            ->data($qrCodeData)
+            ->errorCorrectionLevel(new High())
+            ->size(300)
+            ->margin(10)
+            ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->labelText('Scan for Reservation Details')
+            ->labelAlignment(new Center())
+            ->build();
+
+        // 4. Return the QR code as an image
+        $response = new Response();
+        $response->headers->set('Content-Type', $result->getMimeType());
+        $response->setContent($result->writeString(new PngWriter()));
+
+        return $response;
+    }
 
 }
