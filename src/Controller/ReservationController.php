@@ -198,6 +198,16 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
             'form' => $form,
         ]);
     }
+    #[Route('/{id}', name: 'app_reservation_deleteFe', methods: ['POST'])]
+    public function deleteFe(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($reservation);
+            $entityManager->flush();
+        }
+    
+        return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
+    }
 
     #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]
     public function delete(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
@@ -210,15 +220,6 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}', name: 'app_reservation_deleteFe', methods: ['POST'])]
-    public function deleteFe(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($reservation);
-            $entityManager->flush();
-        }
     
-        return $this->redirectToRoute('app_reservation_showres', [], Response::HTTP_SEE_OTHER);
-    }
 
 }
