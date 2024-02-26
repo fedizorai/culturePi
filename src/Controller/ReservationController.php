@@ -90,6 +90,7 @@ class ReservationController extends AbstractController
         if ($file) {
             // Create a new ReaderXlsx object
             $reader = new ReaderXlsx();
+            $spreadsheet = new Spreadsheet();
             $spreadsheet = $reader->load($file->getPathname());
            /* try {
                 // Load the Excel file
