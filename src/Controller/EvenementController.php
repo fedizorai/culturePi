@@ -89,6 +89,20 @@ class EvenementController extends AbstractController
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/deleteback/{id}', name: 'app_evenement_deletee', methods: ['POST'])]
+    public function deletee(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($evenement);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    
+
     #[Route('/', name: 'app_evenement_indexx', methods: ['GET','POST'])]
     public function indexx(EntityManagerInterface $entityManager,EvenementRepository $evenementRepository,Request $request): Response
     {

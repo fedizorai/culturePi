@@ -87,6 +87,8 @@ class CategorieEventController extends AbstractController
 
         return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
     
     
 

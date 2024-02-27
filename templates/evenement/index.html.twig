@@ -98,8 +98,21 @@
                 <div class="row">
                 <div class="col-lg-6">
                     <div class="image">
-                    <img src="{{asset('assets/images/deals-01.jpg')}}" alt="">
-                    </div>
+    {% set imageList = [
+        'deals-01.jpg',
+        'deals-02.jpg',
+        'deals-03.jpg',
+        'deals-04.jpg',
+
+    ] %}
+
+    {% set randomIndex = random(0, imageList|length - 1) %}
+
+    {% set randomImage = imageList[randomIndex] %}
+
+    <img src="{{ asset('assets/images/' ~ randomImage) }}" alt="">
+</div>
+
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="content">
@@ -125,12 +138,15 @@
           </div>
         </div>
               {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+    <tr>
+        <td colspan="6">
+            <div class="notification">
+                Pas Des Evenements Disponible ....
+            </div>
+        </td>
+    </tr>
+
         {% endfor %}
-
-
 
         </div>
     </div>
@@ -154,3 +170,4 @@
 
 
 {% endblock %}
+
