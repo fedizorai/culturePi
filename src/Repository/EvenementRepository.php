@@ -29,6 +29,8 @@ class EvenementRepository extends ServiceEntityRepository
     }
 
     
+
+    
 public function SortBylieuEvenement()
 {
     return $this->createQueryBuilder('e')
@@ -46,6 +48,8 @@ public function SortByDateEvenement()
         ->getResult()
         ;
 }
+
+
 
     public function findByNomEvenement($nomEvenement)
     {
@@ -69,10 +73,14 @@ public function findByDateEvenement( $DateEvenement)
 {
     return $this-> createQueryBuilder('e')
         ->andWhere('e.dateEvent LIKE :dateEvent')
-        ->setParameter('categorie','%' .$DateEvenement. '%')
+        ->setParameter('dateEvent','%' .$DateEvenement. '%')
         ->getQuery()
         ->execute(); 
 }
+
+
+
+
 
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects

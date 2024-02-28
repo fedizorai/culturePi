@@ -3,52 +3,47 @@
 {% block title %}Evenement{% endblock %}
 
 {% block body %}
-   <div style="text-align: center; margin-bottom: 40px;">
-    <h1 style="display: inline-block; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+   <div class="text-center mb-4">
+    <h1 class="display-inline-block px-4 border rounded">
         <i class="fa fa-map"></i> Evenement Details
     </h1>
-</div>
+   </div>
 
-
-<div>
-
-
-    <table class="container">
-    
+   <div class="reservation-form">
+    <table class="table">
         <tbody>
             <tr>
-                <th>NomEvent</th>
+                <th scope="row">Nom Evenement</th>
                 <td>{{ evenement.nomEvent }}</td>
             </tr>
             <tr>
-                <th>MaxPlacesEvent</th>
+                <th scope="row">MaxPlaces</th>
                 <td>{{ evenement.maxPlacesEvent }}</td>
             </tr>
             <tr>
-                <th>DateEvent</th>
+                <th scope="row">Date</th>
                 <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>LieuEvent</th>
+                <th scope="row">Lieut</th>
                 <td>{{ evenement.lieuEvent }}</td>
             </tr>
         </tbody>
     </table>
-    
-</div>
-<div style="text-align: center;">
-    <div class="border-button" style="display: inline-block;">
-        <a href="{{ path('app_evenement_index') }}">Back to List</a>
+   </div>
+
+   <div class="text-center">
+    <div class="btn btn-secondary mr-2">
+        <a class="text-light" href="{{ path('app_evenement_index') }}">Back to List</a>
     </div>
 
-    <div class="border-button" style="display: inline-block;">
-        <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Edit</a>
+    <div class="btn btn-info mr-2">
+        <a class="text-light" href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Edit</a>
     </div>
-</div>
 
-   {{ include('evenement/_delete_form.html.twig') }}
+    <div >
+        {{ include('evenement/_delete_form.html.twig') }}
+    </div>
+   </div>
 
 {% endblock %}
-
-
-

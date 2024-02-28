@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+
+
 use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert; 
@@ -15,7 +17,7 @@ class Evenement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank(message:"remplir svp")]
+    #[Assert\NotBlank(message:"Remplir svp")]
     #[ORM\Column(length: 255, nullable: true)]
    private ?string $nomEvent = null;
 
@@ -95,4 +97,8 @@ class Evenement
 
         return $this;
     }
+
+ 
+
+
 }

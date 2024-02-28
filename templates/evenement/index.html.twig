@@ -18,7 +18,6 @@
 
 {% block body %}
 
-    
 
 <div class="main-panel">
     <div class="content-wrapper">
@@ -45,17 +44,18 @@
 
                                  <div class="form-check">
                                     <label class="form-check-label" style="width: 86px;margin-left: -2px;margin-right: 10px;">
-                                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="lieuEvent" >lieux</label>
+                                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="lieuEvent" >lieu</label>
                                 </div>
 
                                 <div class="form-check">
                                     <label class="form-check-label" style="width: 86px;margin-left: -2px;margin-right: 10px;">
-                                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="dateEvent" >dateEvent</label>
+                                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="dateEvent" >Date</label>
                                 </div>
 
                                 
 
                                 <button type="Submit" class="btn btn-success btn-fw" style="margin: auto; ">Sort</button>
+                                
                             </div>
                         </form>
 
@@ -69,7 +69,7 @@
                                     <select name="optionsearch" class="js-example-basic-single" style="width: 200px;height: 38px; color: white; background-color: #191c24; border-radius: 4px;text-align: center;border: 2px solid #0090e7;margin-right: 15px;">
                                         <option value="">Choisi un Critére</option>
                                         <option value="nomEvent">Nom Evenement</option>
-                                        <option value="lieuEvent">Lieu Evenement</option>                            
+                                        <option value="lieuEvent">Lieu Evenement</option>      
                                     </select>
                                 </div>
                                 <div class="form-group col-md-7">
@@ -82,6 +82,9 @@
                                 </div>
                             </form>
                         </li>
+                        <div>
+                        <p><a href="{{ path('generatorservice') }}" class="btn btn-primary px-5 py-1">PDF</a></p>
+                        </div>
                     </ul>
 <div class="amazing-deals">
         <div class="container">
@@ -132,6 +135,9 @@
                     <div class="main-button">
                         <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">Show Evenement</a>
                     </div>
+
+                    
+                    
                     </div>
                 </div>
             </div>

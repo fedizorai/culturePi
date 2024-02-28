@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\PdfGeneratorService;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
@@ -11,6 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+
+use App\Repository\PdfGeneratorServiceRepository;
+
+use Dompdf\Dompdf;
+
 
 
 #[Route('/evenement')]
@@ -117,6 +124,8 @@ class EvenementController extends AbstractController
             if ( $request->request->get('optionsRadios')){
                 $SortKey = $request->request->get('optionsRadios');
                 switch ($SortKey){
+
+
                     case 'nomEvent':
                         $evenements = $evenementRepository->SortByNomEvenement();
                         break;
@@ -129,6 +138,11 @@ class EvenementController extends AbstractController
                     case 'dateEvent':
                         $evenements = $evenementRepository->SortByDateEvenement();
                         break;
+
+                       
+                        
+
+                        
                         
 
                 }
@@ -149,7 +163,9 @@ class EvenementController extends AbstractController
                     case 'dateEvent':
                         $evenements = $evenementRepository->findByDateEvenement($value);
                         break;
-
+                       
+                            
+                        
 
                 }
             }
@@ -166,4 +182,30 @@ class EvenementController extends AbstractController
     ]);
     }
    
+
+ 
+   #[Route('/pdf', name: 'generatorservice')]
+    public function pdfService(EntityManagerInterface $entityManager): Response
+    { 
+        $evenements = $entityManager
+        ->getRepository(Evenement::class)
+        ->findAll();
+
+        $html = $this->renderView('evenement/PdfEvenement.html.twig', ['evenements' => $evenements]);
+        $pdfGeneratorService = new PdfGeneratorService();
+        $pdf = $pdfGeneratorService->generatePdf($html);
+
+        return new Response($pdf, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="document.pdf"',
+        ]);
+    }
+
+
 }
+    
+  
+
+
+
+
