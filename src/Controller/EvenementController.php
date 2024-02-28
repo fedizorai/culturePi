@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 use App\Repository\PdfGeneratorServiceRepository;
@@ -36,7 +37,12 @@ class EvenementController extends AbstractController
     {
         return $this->render('evenement/liste.html.twig', [
             'evenements' => $evenementRepository->findAll(),
+
+            
         ]);
+        
+
+        
     }
 
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
@@ -65,6 +71,8 @@ class EvenementController extends AbstractController
         return $this->render('evenement/show.html.twig', [
             'evenement' => $evenement,
         ]);
+
+        
     }
 
     #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
@@ -182,25 +190,6 @@ class EvenementController extends AbstractController
     ]);
     }
    
-
- 
-   #[Route('/pdf', name: 'generatorservice')]
-    public function pdfService(EntityManagerInterface $entityManager): Response
-    { 
-        $evenements = $entityManager
-        ->getRepository(Evenement::class)
-        ->findAll();
-
-        $html = $this->renderView('evenement/PdfEvenement.html.twig', ['evenements' => $evenements]);
-        $pdfGeneratorService = new PdfGeneratorService();
-        $pdf = $pdfGeneratorService->generatePdf($html);
-
-        return new Response($pdf, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="document.pdf"',
-        ]);
-    }
-
 
 }
     

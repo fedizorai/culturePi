@@ -20,9 +20,11 @@ class Evenement
     #[Assert\NotBlank(message:"Remplir svp")]
     #[ORM\Column(length: 255, nullable: true)]
    private ?string $nomEvent = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $maxPlacesEvent = null;
+   #[ORM\Column(nullable: true)]
+   #[Assert\Regex(
+       pattern: "/^\d+$/",
+       message: "Veuillez entrer uniquement des chiffres.")]
+   private ?int $maxPlacesEvent = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateEvent ;

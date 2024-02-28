@@ -1,9 +1,7 @@
 <?php
 // src/Service/PdfGeneratorService.php
 namespace App\Entity;
-
 use App\Entity\Evenement;
-use App\Repository\EvenementRepository;
 
 use TCPDF;
 
@@ -14,7 +12,7 @@ class PdfGeneratorService
         $pdf = new TCPDF();
         $pdf->AddPage();
         // Add logo to the PDF
-$image_file = 'assets/images/logo.png';
+$image_file = 'public/front/images/logoo.jpg';
 $pdf->Image($image_file, 10, 10, '', '', '', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -22,5 +20,3 @@ $pdf->Image($image_file, 10, 10, '', '', '', '', 'T', false, 300, '', false, fal
     }
 }
 ?>
-
-

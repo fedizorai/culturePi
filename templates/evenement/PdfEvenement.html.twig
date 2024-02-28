@@ -7,90 +7,71 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 50px;
         }
-
-        header {
+        .header {
             text-align: right;
-            margin-bottom: 20px;
         }
-
-        .center {
+        .logo {
             text-align: center;
-            margin-bottom: 30px;
         }
-
+        .logo img {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+        .title {
+            text-align: center;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
+            margin-top: 20px;
         }
-
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid black;
             padding: 8px;
             text-align: left;
         }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        h1 {
-            text-align: center;
-        }
     </style>
-    <title>Liste des événements</title>
 </head>
 <body>
 
-    <header>
-        Date et heure actuelles: {{ "now"|date('Y-m-d H:i') }}
-    </header>
-
-    <div class="center">
-        <img src="{{ asset('assets/images/logo.png') }}" class="card-img-top" alt="Event Image">
+    <div class="header">
+        Date et heure actuelles : {{ "now"|date('Y-m-d H:i') }}
     </div>
-{% block title %}<h1>LISTES DES EVENEMENTS</h1>{% endblock %}
-    {% block body %}
-<div>
-<table  border="3">
-        <thead >
-            <tr>
-                    <th>Image</th>
+
+    <div class="logo">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="Description de votre image">
+    </div>
+
+    <div class="title">
+        <h1>LISTES DES EVENEMENTS</h1>
+    </div>
+
+    <div class="body">
+        <table>
+            <thead>
+                <tr>
                     <th>Nom</th>
                     <th>Lieu</th>
                     <th>Date</th>
                     <th>Places Disponibles</th>
+                    <th>Categorie</th>
                 </tr>
             </thead>
             <tbody>
                 {% for evenement in evenements %}
                     <tr>
-
-    <div class="image">
-    {% set imageList = [
-        'deals-01.jpg',
-        'deals-02.jpg',
-        'deals-03.jpg',
-        'deals-04.jpg',
-
-    ] %}
-
-                     {% set randomIndex = random(0, imageList|length - 1) %}
-
-                     {% set randomImage = imageList[randomIndex] %}
-
-                  <td>
-                  <img src="{{ asset('assets/images/' ~ randomImage) }}" style=" width:50px; height:50px; " alt=""/>
- </td>  
                         <td>{{ evenement.nomEvent }}</td>
                         <td>{{ evenement.lieuEvent }}</td>
                         <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
                         <td>{{ evenement.maxPlacesEvent }} places</td>
+                        <td>{{ evenement.categorie}} </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-{% endblock %}
+
+</body>
+</html>
