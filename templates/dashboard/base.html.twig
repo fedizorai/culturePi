@@ -15,7 +15,8 @@
       
     {% endblock %}
 </head>
-
+{% if app.user %}
+    {% if 'ROLE_ADMIN' in app.user.roles  %}
 <body>
 
   {% block navbar %}
@@ -481,5 +482,46 @@
         <script src="{{ asset('assetsFB/libs/simplebar/dist/simplebar.js') }}"></script>
         <script src="{{ asset('assetsFB/js/dashboard.js') }}"></script>
 </body>
-
+{% else %}
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Erreur</title>
+        </head>
+        <body>
+        <h1>You have to be an Admin</h1>
+        <p>
+            You will redirect to the Home page in 6 seconds
+        </p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "{{ path('front') }}";
+            }, 6000);
+        </script>
+        </body>
+        </html>
+    {% endif %}
+    {% else %}
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Erreur</title>
+        </head>
+        <body>
+        <h1>You have to LOGIN</h1>
+        <p>
+            You will redirect to the Home page in 6 seconds
+        </p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "{{ path('front') }}";
+            }, 6000);
+        </script>
+        </body>
+        </html>
+    {% endif %}
 </html>
