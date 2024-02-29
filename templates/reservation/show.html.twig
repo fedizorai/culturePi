@@ -20,6 +20,11 @@
 
     <header class="header-area header-sticky">
         <div class="container">
+        {% for flash_message in app.session.flashBag.get('success') %}
+    <div class="alert alert-success">
+        {{ flash_message }}
+    </div>
+{% endfor %}
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
