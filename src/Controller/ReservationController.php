@@ -17,12 +17,10 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
 use App\Entity\Voyage;
 
 //QR CODE
-use Endroid\QrCode\Builder\QrBuilder;
-use Endroid\QrCode\ErrorCorrectionLevel\High;
-use Endroid\QrCode\Label\Alignment\Center;
-use Endroid\QrCode\Label\Label;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
-use Endroid\QrCode\Writer\PngWriter;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 //
 
 
@@ -230,11 +228,11 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/qrcode', name: 'qrcodegenerate', methods: ['GET','POST'])]
-    public function generateQRCode($reservationId)
+    #[Route('/qrcode/{id}', name: 'qrcodegenerate', methods: ['GET','POST'])]
+    public function generateQRCode(Reservation $reservation)
     {
         // 1. Get reservation data
-        $reservation = $this->getDoctrine()->getRepository(Reservation::class)->find($reservationId);
+        //$reservation = $this->getDoctrine()->getRepository(Reservation::class)->find($id);
 
         if (!$reservation) {
             throw $this->createNotFoundException('Reservation not found');
@@ -242,31 +240,26 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
 
         // 2. Generate data to encode
         $qrCodeData = "Reservation ID: {$reservation->getId()}\n" .
-              "Number of Tickets: {$reservation->getNbrtickets()}\n" .
-              "Payment Method: {$reservation->getPaiement()}\n" .
-              "Voyage Details:\n" .
-              "  - Title: {$reservation->getVoyage()->getTitle()}\n" .  // Assuming Voyage has a `getTitle` method
-              "  - Location: {$reservation->getVoyage()->getLocation()}\n" . // Assuming Voyage has a `getLocation` method
-              "  - Date: {$reservation->getVoyage()->getDate()}\n" .  // Assuming Voyage has a `getDate` method (format as needed)
-              // ...Add more reservation details as needed
+                      "Number of Tickets: {$reservation->getNbrtickets()}\n" .
+                      "Payment Method: {$reservation->getPaiement()}\n" .
+                      "Voyage Details:\n" .
+                      "  - Title: {$reservation->getVoyage()->getTitle()}\n" .  // Assuming Voyage has a `getTitle` method
+                      "  - Location: {$reservation->getVoyage()->getLocation()}\n" . // Assuming Voyage has a `getLocation` method
+                      "  - Date: {$reservation->getVoyage()->getDuration()}\n";  // Assuming Voyage has a `getDate` method (format as needed)
+                      // ...Add more reservation details as needed
 
         // 3. Create the QR Code object
-        $result = QrBuilder::create()
-            ->data($qrCodeData)
-            ->errorCorrectionLevel(new High())
-            ->size(300)
-            ->margin(10)
-            ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
-            ->labelText('Scan for Reservation Details')
-            ->labelAlignment(new Center())
-            ->build();
+        $renderer = new ImageRenderer(
+            new RendererStyle(400),
+            new ImagickImageBackEnd()
+        );
+        $writer = new Writer($renderer);
+        $writer->writeFile($qrCodeData, 'qrcode.png');
 
-        // 4. Return the QR code as an image
-        $response = new Response();
-        $response->headers->set('Content-Type', $result->getMimeType());
-        $response->setContent($result->writeString(new PngWriter()));
+        // 5. Return the image as a response
+        
 
-        return $response;
+        return $writer;
     }
 
 }

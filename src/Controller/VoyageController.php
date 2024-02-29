@@ -52,7 +52,7 @@ class VoyageController extends AbstractController
             }
             $entityManager->persist($voyage);
             $entityManager->flush();
-
+            flash()->addSuccess('Voyage Added Successfully!');
             return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,6 +78,7 @@ class VoyageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'Voyage Edited Successfully!');
 
             return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -95,6 +96,7 @@ class VoyageController extends AbstractController
             $entityManager->remove($voyage);
             $entityManager->flush();
         }
+        $this->addFlash('success', 'Voyage Deleted Successfully!');
 
         return $this->redirectToRoute('app_voyage_showbe', [], Response::HTTP_SEE_OTHER);
     }
