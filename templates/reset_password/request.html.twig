@@ -1,22 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Reset Your Password{% endblock %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reset Your Password - Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/assetsFB/images/logos/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('/assetsFB/css/styles.css') }}">
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-    <h1>Reset your password</h1>
-
-    {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>
-                Enter your email address, and we will send you a
-                link to reset your password.
-            </small>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+    <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card mb-0 p-3">
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                <a href="./index.html" class="logo-img d-block py-3">
+                                    <img src="{{ asset('/assetsFB/images/logos/dark-logo.png') }}" width="120" alt="Modernize Free Logo">
+                                </a>
+                                <h2 class="mb-0">Reset Your Password</h2>
+                                <p class="text-muted">Enter your email address below and we'll send you a link to reset your password.</p>
+                            </div>
+                            {{ form_start(requestForm) }}
+                                <div class="mb-3">
+                                    {{ form_row(requestForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email Address'}}) }}
+                                </div>
+                                <button class="btn btn-primary w-100" type="submit">Send Password Reset Email</button>
+                            {{ form_end(requestForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <button class="btn btn-primary">Send password reset email</button>
-    {{ form_end(requestForm) }}
+    </div>
+</div>
 {% endblock %}
