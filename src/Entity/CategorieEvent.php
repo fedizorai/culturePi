@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Evenement;
 
 
-
-
 #[ORM\Entity(repositoryClass: CategorieEventRepository::class)]
 class CategorieEvent
 {
@@ -27,6 +25,8 @@ class CategorieEvent
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Evenement::class)]
     private Collection $evenements;
+
+   
 
     public function __construct()
     {
@@ -96,4 +96,6 @@ class CategorieEvent
     {
         return $this->nom ?: '';
     }
+
+    
 }

@@ -11,23 +11,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Calendar;
 use App\Entity\Evenement;
 use App\Entity\PdfGeneratorService;
-
-
+use App\Repository\CalendarRepository;
 
 #[Route('/categorie/event')]
 class CategorieEventController extends AbstractController
 {
     #[Route('/', name: 'app_categorie_event_index', methods: ['GET'])]
-    public function index(CategorieEventRepository $categorieEventRepository, EvenementRepository $evenementRepository): Response
+    public function index(CategorieEventRepository $categorieEventRepository, EvenementRepository $evenementRepository,CalendarRepository $calendarRepository): Response
     {
         $categorieEvents = $categorieEventRepository->findAll();
         $events = $evenementRepository->findAll(); // Fetch events here
-
+        $calendars =$calendarRepository->findAll();
         return $this->render('categorie_event/index.html.twig', [
             'categorie_events' => $categorieEvents,
             'events' => $events, // Pass events to the template
+            'calendars' => $calendars,
         ]);
     }
 
