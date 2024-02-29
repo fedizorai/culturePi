@@ -139,7 +139,7 @@
         <div class="container">
     <div class="row">
         <div class="col-lg-3 mx-auto mt-5 text-center">
-            <a href="{{ path('app_reservation_showres') }}" class="btn btn-success m-1">->See your Reservations Here</a>
+            <a href="{{ path('app_reservation_showres') }}" class="btn btn-outline-primary m-1">->See your Reservations Here</a>
         </div>
     </div>
       </div>
@@ -175,26 +175,24 @@
 
  <script>
     function searchVoyages() {
-      // Get the input values
-      var searchQuery = document.getElementById('inputLocation').value.toLowerCase();
-      var selectedPrice = document.getElementById('choosePrice').value;
+        // Get the input values
+        var searchQuery = document.getElementById('inputLocation').value.toLowerCase();
 
-      // Get the list of voyages
-      var voyages = document.getElementById('voyagesList').getElementsByClassName('item');
+        // Get the list of voyages
+        var voyages = document.getElementById('voyagesList').getElementsByClassName('item');
 
-      // Loop through voyages and show/hide based on the search query and price
-      for (var i = 0; i < voyages.length; i++) {
-        var voyageTitle = voyages[i].getElementsByClassName('content')[0].getElementsByTagName('h4')[0].innerText.toLowerCase();
-        var voyageBudget = parseInt(voyages[i].getAttribute('budget')); // Assuming 'data-budget' attribute contains the budget value
+        // Loop through voyages and show/hide based on the search query
+        for (var i = 0; i < voyages.length; i++) {
+            var voyageTitle = voyages[i].getElementsByClassName('content')[0].getElementsByTagName('h4')[0].innerText.toLowerCase();
 
-        // Check if the title includes the search query and the price is within the selected range
-        var isVisible = voyageTitle.includes(searchQuery) && (selectedPrice === "Price Range" || (selectedPrice === "2500+" && voyageBudget >= 2500) || (selectedPrice !== "2500+" && voyageBudget >= parseInt(selectedPrice.split('-')[0]) && voyageBudget <= parseInt(selectedPrice.split('-')[1])));
+            // Check if the title includes the search query
+            var isVisible = voyageTitle.includes(searchQuery);
 
-        // Show/hide the voyage based on the search result
-        voyages[i].style.display = isVisible ? 'block' : 'none';
-      }
+            // Show/hide the voyage based on the search result
+            voyages[i].style.display = isVisible ? 'block' : 'none';
+        }
     }
-     const voyagesPerPage = 4;
+     const voyagesPerPage = 6;
     const totalVoyages = document.querySelectorAll('.item').length;
     const totalPages = Math.ceil(totalVoyages / voyagesPerPage);
 
