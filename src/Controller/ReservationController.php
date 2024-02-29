@@ -68,7 +68,7 @@ class ReservationController extends AbstractController
                 ->setCellValue('B' . $row, $reservation->getNbrtickets())
                 ->setCellValue('C' . $row, $reservation->getIduser())
                 ->setCellValue('D' . $row, $reservation->getPaiement())
-                ->setCellValue('E' . $row, $reservation->getVoyage()->getTitle()); // Assuming Voyage has getId method
+                ->setCellValue('E' . $row, $reservation->getVoyage()->getId()); // Assuming Voyage has getId method
     
             $row++;
         }
@@ -170,8 +170,6 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         $entityManager->persist($reservation);
         $entityManager->persist($voyage);
         $entityManager->flush();
-        $this->addFlash('success', 'Reservation Added Successfully!');
-
 
         return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
     }
@@ -215,7 +213,7 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
             $entityManager->remove($reservation);
             $entityManager->flush();
         }
-        $this->addFlash('success', 'Reservation Deleted Successfully!');
+    
         return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
     }
 
