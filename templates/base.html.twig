@@ -31,6 +31,17 @@ https://templatemo.com/tm-580-woox-travel
 
   </head>
  {% block body %}
+ {% if app.user %}
+
+  {% if app.user.access == 1 %}
+                                <script>
+                                    window.location.href = "{{ path('app_ban') }}";
+                                </script>
+
+                            {% endif %}
+                           {% endif %}
+
+                            
 <body>
 
   <!-- *** Preloader Start *** -->

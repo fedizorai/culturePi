@@ -1,37 +1,258 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}User index{% endblock %}
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Culture Vibes!</title>
+		<link rel="shortcut icon" type="image/png" href="{{ asset('/assetsFB/images/logos/favicon.png') }}"/>
+		<link rel="stylesheet" href="{{ asset('/assetsFB/css/styles.css') }}"/>
+	</head>
 
-{% block body %}
-    <h1>User index</h1>
+	<body>
+		<!-- Body Wrapper -->
+		<div
+			class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+			<!-- Sidebar Start -->
+			<aside
+				class="left-sidebar">
+				<!-- Sidebar scroll-->
+				<div>
+					<div class="brand-log   o d-flex align-items-center justify-content-between">
+						<a href="./index.html" class="text-nowrap logo-img">
+							<img src="../assetsFB/images/logos/dark-logo.png" width="180" alt=""/>
+						</a>
+						<div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+							<i class="ti ti-x fs-8"></i>
+						</div>
+					</div>
+					<!-- Sidebar navigation-->
+					<nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+						<ul id="sidebarnav">
+							<li class="nav-small-cap">
+								<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+								<span class="hide-menu">Home</span>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./index.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-layout-dashboard"></i>
+									</span>
+									<span class="hide-menu">Dashboard</span>
+								</a>
+							</li>
+							<li class="nav-small-cap">
+								<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+								<span class="hide-menu">Mangements</span>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="" aria-expanded="false">
+									<span>
+										<i class="ti ti-article"></i>
+									</span>
+									<span class="hide-menu">Gestion Des Voyages</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-alert-circle"></i>
+									</span>
+									<span class="hide-menu">gestion des evenements
+									</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-cards"></i>
+									</span>
+									<span class="hide-menu">gestion des hebergements</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-file-description"></i>
+									</span>
+									<span class="hide-menu">gestion de forum</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-typography"></i>
+									</span>
+									<span class="hide-menu">gestion des utilisateurs</span>
+								</a>
+							</li>
+							<li class="nav-small-cap">
+								<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+								<span class="hide-menu">AUTH</span>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-login"></i>
+									</span>
+									<span class="hide-menu">Login</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-user-plus"></i>
+									</span>
+									<span class="hide-menu">Register</span>
+								</a>
+							</li>
+						</nav>
+						<!-- End Sidebar navigation -->
+					</div>
+					<!-- End Sidebar scroll-->
+				</aside>
+				<!--  Sidebar End -->
+				<!-- Main Content -->
+				<div
+					class="body-wrapper">
+					<!--  Header Start -->
+					<header class="app-header">
+						<nav class="navbar navbar-expand-lg navbar-light">
+							<ul class="navbar-nav">
+								<li class="nav-item d-block d-xl-none">
+									<a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+										<i class="ti ti-menu-2"></i>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-icon-hover" href="javascript:void(0)">
+										<i class="ti ti-bell-ringing"></i>
+										<div class="notification bg-primary rounded-circle"></div>
+									</a>
+								</li>
+							</ul>
+							<div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+								<ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+									<li class="nav-item dropdown">
+										<a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+											<img src="{{ asset('/assetsFB/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
+										</a>
+										<div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+											<div class="message-body">
+												<a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+													<i class="ti ti-user fs-6"></i>
+													<p class="mb-0 fs-3">My Profile</p>
+												</a>
+												<a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+													<i class="ti ti-mail fs-6"></i>
+													<p class="mb-0 fs-3">My Account</p>
+												</a>
+												<a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+													<i class="ti ti-list-check fs-6"></i>
+													<p class="mb-0 fs-3">My Task</p>
+												</a>
+												<a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</nav>
+					</header>
+					<!--  Header End -->
+					<div class="container-fluid">
+						<div class="card">
+							<div class="col-lg-8 d-flex align-items-stretch">
+								<div class="card w-100">
+									<div class="card-body d-flex justify-content-between align-items-center p-4">
+										<h5 class="card-title fw-semibold mb-0">Users' List</h5>
+                                            <a href="{{ path('app_admin_user_new') }}" class="btn btn-outline-primary m-1">Create new</a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>IsVerified</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+									</div>
+
+      <div class="d-flex"  >
+            <div class="col-md-12 mx-auto">
+        {# <div class="small fw-light">search input with icon</div> #}
+        <div class="input-group">
+        <input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
+        <span class="input-group-append">
+            <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill ms-n5" type="button" id="searchButton">
+                Search
+            </button>
+        </span>
+        </div>
+    </div>
+</div>
+
+
+									<table class="table text-nowrap mb-0 align-middle">
+										<thead class="text-dark fs-4">
+											<tr>
+												<th class="border-bottom-0">
+													<h6 class="fw-semibold mb-0">ID</h6>
+												</th>
+												<th class="border-bottom-0">
+													<h6 class="fw-semibold mb-0">Email</h6>
+												</th>
+												<th class="border-bottom-0">
+													<h6 class="fw-semibold mb-0">Description</h6>
+												</th>
+												<th class="border-bottom-0">
+													<h6 class="fw-semibold mb-0">Action</h6>
+												</th>
+												
+												
+											</tr>
+										</thead>
+										<tbody>
         {% for user in users %}
-            <tr>
+            <tr class="user-row">
                 <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
+                <td class="user-email">{{ user.email }}</td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">Show</a>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">Edit</a>
                 </td>
+                <td>
+                            {% if user.access ==0 %}
+                            <a href="{{ path('app_user_ban', {'id': user.id}) }}">Ban</a>
+                            {% else %}
+                            <a href="{{ path('app_user_ban', {'id': user.id}) }}">Unban</a>
+                            {% endif %}
+                        </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
+            <tr id="noUsersRow">
+                <td colspan="4">No records found</td>
             </tr>
         {% endfor %}
+         <tr id="noUsersRow" style="display: none;">
+                <td colspan="7" class="text-center">No Users found</td>
+            </tr>
         </tbody>
     </table>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
 
-    <a href="{{ path('app_admin_user_new') }}">Create new</a>
-{% endblock %}
+ $(document).ready(function () {
+            $('#searchButton').click(function () {
+                var searchQuery = $('#example-search-input').val().toLowerCase();
+                var noUsersRow = $('#noUsersRow');
+    
+                // Loop through each user row and show/hide based on the search query
+                $('.user-row').each(function () {
+                    var userRowText = $(this).text().toLowerCase();
+    
+                    // If the search query is found in the user row, show it; otherwise, hide it
+                    $(this).toggle(userRowText.includes(searchQuery));
+                });
+    
+                // Show/hide the "No Users Found" row based on search results
+                noUsersRow.toggle($('.user-row:visible').length === 0);
+            });
+        });
+</script>
+    

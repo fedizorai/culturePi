@@ -62,7 +62,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $user->setAccess(0);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -75,7 +75,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-
+            flash()->addSuccess('Votre compte a ete cree');
             return $this->redirectToRoute('app_home_front');
         }
 

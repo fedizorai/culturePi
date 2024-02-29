@@ -50,6 +50,7 @@ class AdminUserController extends AbstractController
                 $fileName
             );
             $user->setImagePath($fileName);
+            $user->setAccess(0);
             $plainPassword = $form->get('plainPassword')->getData();
             $hashPassword = $passwordHasher->hashPassword($user, $plainPassword);
             $user->setPassword($hashPassword);
@@ -117,4 +118,21 @@ class AdminUserController extends AbstractController
 
         return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/{id}/ban', name: 'app_user_ban', methods: ['GET'])]
+    public function ban(User $user, EntityManagerInterface $entityManager): Response
+    { $access=$user->getAccess();
+        if ($access == 0){
+            $user->setAccess(1);
+            flash()->addSuccess('Account Banned');
+
+        }
+        if ($access == 1){
+            $user->setAccess(0);
+            flash()->addSuccess('Account Unbanned');
+
+        }
+        $entityManager->flush();
+        return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

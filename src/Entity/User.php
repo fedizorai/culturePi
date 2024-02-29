@@ -37,7 +37,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Assert\NotBlank(message: "You Have to insert an Image")]
     private ?string $image_path = null;
+    #[ORM\Column]
+    private ?int $access = null;
+    public function getAccess(): ?int
+    {
+        return $this->access;
+    }
 
+    public function setAccess(?int $access): void
+    {
+        $this->access = $access;
+    }
     public function getImagePath(): ?string
     {
         return $this->image_path;
