@@ -122,7 +122,7 @@
                   <h6><i class="fa fa-dollar-sign"> {{ voyage.budget }}</i></h6>
                   <p>{{ voyage.description }}</p>
                   <div class="main-button">
-  <a style="color: #ffffff;">Make a Reservation</a>
+  <a href="{{ path('app_reservation_new', {'id': voyage.id}) }}" style="color: #ffffff;">Make a Reservation</a>
 </div>
                 </div>
               </div>

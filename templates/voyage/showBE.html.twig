@@ -164,7 +164,7 @@
 					<!--  Header End -->
 					<div class="container-fluid">
 						<div class="card">
-							<div class="col-lg-8 d-flex align-items-stretch">
+							<div class="col-lg-9 d-flex align-items-stretch">
 								<div class="card w-100">
 									<div class="card-body d-flex justify-content-between align-items-center p-4">
 										<h5 class="card-title fw-semibold mb-0">Voyages List</h5>
@@ -234,7 +234,7 @@
 														</td>
 													{% else %}
 														<td class="border-bottom-0">
-															<span class="badge bg-secondary rounded-3 fw-semibold">{{ voyage.nbrplaces }}</span>
+															<span class="badge bg-warning rounded-3 fw-semibold">{{ voyage.nbrplaces }}</span>
 														</td>
 													{% endif %}
 													<th class="border-bottom-0">
@@ -254,8 +254,12 @@
 											{% endfor %}
 										</tbody>
 									</table>
+
 								</div>
+								
 							</div>
+																        <a href="{{ path('app_reservation_index') }}" class="btn btn-outline-success m-1">-> Reservations List</a>
+
 						</div>
 					</div>
 				</div>
