@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PUBLICATION{% endblock %}
+
+{% block css %}
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/templatemo-woox-travel.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+<style>
+    .publication-frame {
+        background-color: #f2f3f5;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .comment-frame {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .publication-username {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .publication-date {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .publication-content {
+        font-size: 20px;
+    }
+
+    .comment {
+        margin-bottom: 10px;
+    }
+
+    .comment-username {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .comment-content {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .comment-date {
+        font-size: 12px;
+        color: #999;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    
+                    <ul class="nav">
+                        <li><a href="{{ path('app_testt') }}" class="active">Review</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- * Main Banner Area Start * -->
+<div>
+    <!-- Contenu du bannière principal -->
+</div>
+<!-- * Main Banner Area End * -->
+
+
+
+ <div>
+              .
+              .
+              .
+            </div>
+            <div>
+              .
+              .
+              .
+            </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Cadre de la publication -->
+            <div class="publication-frame">
+                <p class="publication-username"><strong>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</strong></p>
+                <p class="publication-date">{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</p>
+                <p class="publication-content">{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</p>
+            </div>
+
+            <!-- Affichage des commentaires -->
+            {% for commentaire in c_o_m_m_e_n_t_a_i_r_es %}
+            <div class="comment-frame">
+                <p class="comment-username"><strong>{{ commentaire.NAME }}</strong></p>
+                <p class="comment-content">{{ commentaire.CONTENUCOM }}</p>
+                <p class="comment-date">{{ commentaire.DATECOM|date('Y-m-d ') }}</p>
+                <div class="border-button">
+        <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_show', {'id': commentaire.id}) }}">Show</a>
+        <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_edit', {'id': commentaire.id}) }}" >Edit</a>
+    </div>
+            </div>
+            {% endfor %}
+
+            <!-- Formulaire d'ajout de commentaire -->
+            <div style="margin: 50px auto; max-width: 600px; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 1px solid #ddd;">
+                <h1 style="text-align: center; color: #4267B2; font-size: 24px;">Add Comment</h1>
+                <div style="margin-top: 20px;">
+                    {{ form_start(commentForm) }}
+                    {{ form_widget(commentForm) }}
+                    <button type="submit" class="btn" style="background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Save</button>
+                    {{ form_end(commentForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

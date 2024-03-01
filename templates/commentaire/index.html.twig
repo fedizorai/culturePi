@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}COMMENTAIRE index{% endblock %}
+
+{% block body %}
+    <h1>COMMENTAIRE index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CONTENUCOM</th>
+                <th>DATECOM</th>
+                <th>NAME</th>
+                <th>PUBID</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for c_o_m_m_e_n_t_a_i_r_e in c_o_m_m_e_n_t_a_i_r_es %}
+            <tr>
+                <td>{{ c_o_m_m_e_n_t_a_i_r_e.id }}</td>
+                <td>{{ c_o_m_m_e_n_t_a_i_r_e.CONTENUCOM }}</td>
+                <td>{{ c_o_m_m_e_n_t_a_i_r_e.DATECOM ? c_o_m_m_e_n_t_a_i_r_e.DATECOM|date('Y-m-d') : '' }}</td>
+                <td>{{ c_o_m_m_e_n_t_a_i_r_e.NAME }}</td>
+                <td>{{ c_o_m_m_e_n_t_a_i_r_e.PUBID }}</td>
+                <td>
+                    <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_show', {'id': c_o_m_m_e_n_t_a_i_r_e.id}) }}">show</a>
+                    <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_edit', {'id': c_o_m_m_e_n_t_a_i_r_e.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_new') }}">Create new</a>
+{% endblock %}

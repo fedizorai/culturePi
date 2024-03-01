@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    {% block title %}
-        <title>Culture vibes</title>
-        <link rel="shortcut icon" type="image/png" href="asset('assets/images/logo.png')" />
-    {% endblock %}
-    {% block css %}
-        <!-- Bootstrap core CSS -->
-        <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-        <!-- Additional CSS Files -->
-        <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/templatemo-woox-travel.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
-        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-    {% endblock %}
+{% block title %}
+    <title>Culture vibes</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
+{% endblock %}
+{% block css%}
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/templatemo-woox-travel.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+    <link rel="stylesheet" href={{asset('"assets/css/animate.css')}}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+{% endblock %}
 <!--
 
 TemplateMo 580 Woox Travel
@@ -33,7 +34,7 @@ https://templatemo.com/tm-580-woox-travel
  {% block body %}
 <body>
 
-  <!-- *** Preloader Start *** -->
+  <!-- * Preloader Start * -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
@@ -45,43 +46,45 @@ https://templatemo.com/tm-580-woox-travel
     </div>
   </div>
   
-  <!-- *** Preloader End *** -->
+  <!-- * Preloader End * -->
 
-  <!-- *** Header Area Start *** -->
+  <!-- * Header Area Start * -->
 
   <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <!-- *** Logo Start *** -->
-                    <a href="#" class="logo">
-    <img src="asset('assets/images/logo.png')" alt="" style="width: 100px; height: 55px;">
+                    <!-- * Logo Start * -->
+                    <a href="index.html" class="logo">
+    <img src="assets/images/logo.png" alt="" style="width: 100px; height: 55px;">
 </a>
                     </a>
-                    <!-- *** Logo End *** -->
-                    <!-- *** Menu Start *** -->
+                    <!-- * Logo End * -->
+                    <!-- * Menu Start * -->
                     <ul class="nav">
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="#">Voyage</a></li>
-                        <li><a href="#">Go to Deals</a></li>
-                        <li><a href="#">Hebergement</a></li>
-                        <li><a href="#">Review</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="about.html">Voyage</a></li>
+                        <li><a href="deals.html">Evenement</a></li>
+                        <li><a href="reservation.html">Hebergement</a></li>
+                        <li><a href="{{ path('app_testt') }}">review</a></li>
+                        <li><a href="reservation.html">Login</a></li>
+                        
                     </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
-                    <!-- *** Menu End *** -->
+                    <!-- * Menu End * -->
                 </nav>
             </div>
         </div>
     </div>
   </header>
-  <!-- *** Header Area End *** -->
+  <!-- * Header Area End * -->
 
-  <!-- *** Main Banner Area Start *** -->
+  <!-- * Main Banner Area Start * -->
 
+  
   <section id="section-1">
     <div class="content-slider">
       <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
@@ -115,7 +118,7 @@ https://templatemo.com/tm-580-woox-travel
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="#">Explore More</a>
+                          <a href="about.html">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -130,7 +133,7 @@ https://templatemo.com/tm-580-woox-travel
             <div class="main-caption">
               <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
               <h1>Switzerland</h1>
-              <div class="border-button"><a href="#">Go There</a></div>
+              <div class="border-button"><a href="about.html">Go There</a></div>
             </div>
             <div class="container">
               <div class="row">
@@ -151,7 +154,7 @@ https://templatemo.com/tm-580-woox-travel
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="#">Explore More</a>
+                          <a href="about.html">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -166,7 +169,7 @@ https://templatemo.com/tm-580-woox-travel
             <div class="main-caption">
               <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
               <h1>France</h1>
-              <div class="border-button"><a href="#">Go There</a></div>
+              <div class="border-button"><a href="about.html">Go There</a></div>
             </div>
             <div class="container">
               <div class="row">
@@ -187,7 +190,7 @@ https://templatemo.com/tm-580-woox-travel
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="#">Explore More</a>
+                          <a href="about.html">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -202,7 +205,7 @@ https://templatemo.com/tm-580-woox-travel
             <div class="main-caption">
               <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
               <h1>Thailand</h1>
-              <div class="border-button"><a href="#">Go There</a></div>
+              <div class="border-button"><a href="about.html">Go There</a></div>
             </div>
             <div class="container">
               <div class="row">
@@ -223,7 +226,7 @@ https://templatemo.com/tm-580-woox-travel
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
-                          <a href="#">Explore More</a>
+                          <a href="about.html">Explore More</a>
                         </div>
                       </div>
                     </div>
@@ -244,7 +247,7 @@ https://templatemo.com/tm-580-woox-travel
       </nav>
     </div>
   </section>
-  <!-- *** Main Banner Area End *** -->
+  <!-- * Main Banner Area End * -->
   
  
 
@@ -257,7 +260,7 @@ https://templatemo.com/tm-580-woox-travel
         </div>
         <div class="col-lg-4">
           <div class="border-button">
-            <a href="#">Book Yours Now</a>
+            <a href="reservation.html">Book Yours Now</a>
           </div>
         </div>
       </div>
@@ -267,26 +270,27 @@ https://templatemo.com/tm-580-woox-travel
   <footer>
     <div class="container">
       <div class="row">
-
+        <div class="col-lg-12">
+          
+          <br> <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> <a href="https://themewagon.com target="_blank" >ThemeWagon</a></p>
+        </div>
       </div>
     </div>
   </footer>
-  {% endblock %}
 
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   {% block js %}
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
-        <script src="{{ asset('assets/js/isotope.min.js') }}"></script>
-        <script src="{{ asset('assets/js/owl-carousel.js') }}"></script>
-        <script src="{{ asset('assets/js/wow.js') }}"></script>
-        <script src="{{ asset('assets/js/tabs.js') }}"></script>
-        <script src="{{ asset('assets/js/popup.js') }}"></script>
-        <script src="{{ asset('assets/js/custom.js') }}"></script>
-
+  <script src="{{asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
+  <script src="{{asset('assets/js/wow.js')}}"></script>
+  <script src="{{asset('assets/js/tabs.js')}}"></script>
+  <script src="{{asset('assets/js/popup.js')}}"></script>
+  <script src="{{asset('assets/js/custom.js')}}"></script>
 {% endblock %}
   <script>
     function bannerSwitcher() {
@@ -304,5 +308,5 @@ https://templatemo.com/tm-580-woox-travel
   </script>
 
   </body>
-
+{% endblock %}
 </html>

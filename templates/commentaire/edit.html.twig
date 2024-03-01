@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit COMMENTAIRE{% endblock %}
+
+
+{% block body %}
+ <!-- * Header Area Start * -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                       
+                        <ul class="nav">
+                            <li><a href="{{ path('app_testt') }}" class="active">Review</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- * Header Area End * -->
+    <!-- * Main Banner Area Start * -->
+    <section id="section-1">
+        <div class="content-slider">
+            <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
+
+            <div class="slider">
+                <div id="top-banner-1" class="banner">
+                    <div class="banner-inner-wrapper header-text">
+                        <div class="main-caption">
+                            <h2></h2>
+                            <h1>Update your own comment</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div style="margin: 50px auto; max-width: 600px; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center;">Update your Comment</h1>
+
+        <div style="margin-top: 20px;">
+            {% include 'commentaire/_form.html.twig' %}
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <form action="{{ path('app_testt') }}" method="get">
+                <button type="submit" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Back to list</button>
+            </form>
+        </div>
+    </div>
+
+   <!-- * Delete Publication Area Start * -->
+    <div style="margin: 50px auto; max-width: 600px; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center;">Delete your comment</h1>
+
+        <div style="margin-top: 20px;">
+            {{ include('commentaire/_delete_form.html.twig') }}
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <!-- Add any additional content or buttons related to the delete functionality here -->
+        </div>
+    </div>
+    <!-- * Delete Publication Area End * -->
+{% endblock %}
+
+
+
+
+ 
