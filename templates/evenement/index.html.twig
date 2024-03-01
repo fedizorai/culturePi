@@ -77,7 +77,14 @@
                         <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="dateEvent">Date
                     </label>
                 </div>
-                <button type="Submit" class="btn btn-sm btn-primary">Sort</button>
+ 
+                <div>
+                
+                                <button type="Submit" class="btn btn-sm btn-primary">Sort</button>
+
+                </div>
+                
+                
             </div>
         </form>
     </div>
@@ -97,6 +104,7 @@
                 <h2>LES EVENMENETS </h2>
                 <p>Bienvenue sur notre site dédié à la richesse culturelle et touristique qui émerveille les voyageurs du monde entier.</p>
             </div>
+            
             </div>
 {% for evenement in evenements %}
 
@@ -174,11 +182,11 @@
    <div class="text-center">
     <div class="border-button">
         <a href="{{ path('app_evenement_new') }}">Ajouter Evenement</a>
+       
+                        <p><a href="{{ path('main') }}">calander</a></p>
     </div>
 
-    <div>
-                        <p><a href="{{ path('main') }}" class="btn btn-primary px-5 py-1">calander</a></p>
-                        </div>
+   
 </div>
 
 

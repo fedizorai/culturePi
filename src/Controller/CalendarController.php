@@ -33,7 +33,7 @@ class CalendarController extends AbstractController
             $entityManager->persist($calendar);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_calendar_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('calendar/new.html.twig', [
@@ -59,7 +59,7 @@ class CalendarController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_calendar_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('calendar/edit.html.twig', [
@@ -76,6 +76,6 @@ class CalendarController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_calendar_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
     }
 }
