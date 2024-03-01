@@ -12,10 +12,7 @@
                 <div class="card-body">
                     <table class="table">
                         <tbody>
-                            <tr>
-                                <th>Id</th>
-                                <td>{{ user.id }}</td>
-                            </tr>
+                           
                             <tr>
                                 <th>Email</th>
                                 <td>{{ user.email }}</td>
@@ -36,8 +33,11 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center mt-3">
-        <a href="{{ path('app_profile_edit') }}" class="btn btn-primary">Edit Profile</a>
+    <div class="text-center" style="margin-top: 20px;"> <!-- Center the button -->
+        <div class="main-button">
+            <a href="{{ path('app_profile_edit') }}">Edit Profile</a>
+        </div>
+        
     </div>
 </div>
   <style>

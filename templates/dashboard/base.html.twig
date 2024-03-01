@@ -16,7 +16,7 @@
     {% endblock %}
 </head>
 {% if app.user %}
-    {% if 'ROLE_ADMIN' in app.user.roles  %}
+   {% if 'ROLE_ADMIN' in app.user.roles  %}
 <body>
 
   {% block navbar %}
@@ -88,7 +88,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="{{ path('app_admin_user_index') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-typography"></i>
                 </span>
@@ -497,7 +497,7 @@
         </p>
         <script>
             setTimeout(function(){
-                window.location.href = "{{ path('front') }}";
+                window.location.href = "{{ path('/') }}";
             }, 6000);
         </script>
         </body>

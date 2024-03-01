@@ -1,22 +1,147 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Edit User{% endblock %}
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Culture Vibes!</title>
+		<link rel="shortcut icon" type="image/png" href="{{ asset('/assetsFB/images/logos/favicon.png') }}"/>
+		<link rel="stylesheet" href="{{ asset('/assetsFB/css/styles.css') }}"/>
+	</head>
 
-{% block body %}
-    <h1>Edit User</h1>
-
- {{ form_errors(form) }}
-
-    {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(form.ImagePath) }}
-
-        <button type="submit" class="btn">edit</button>
-    {{ form_end(form) }}
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
-
-    {{ include('admin_user/_delete_form.html.twig') }}
-{% endblock %}
+	<body>
+		<!-- Body Wrapper -->
+		<div
+			class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+			<!-- Sidebar Start -->
+			<aside
+				class="left-sidebar">
+				<!-- Sidebar scroll-->
+				<div>
+					<div class="brand-log   o d-flex align-items-center justify-content-between">
+						<a href="./index.html" class="text-nowrap logo-img">
+							<img src="../assetsFB/images/logos/dark-logo.png" width="180" alt=""/>
+						</a>
+						<div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+							<i class="ti ti-x fs-8"></i>
+						</div>
+					</div>
+					<!-- Sidebar navigation-->
+					<nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+						<ul id="sidebarnav">
+							<li class="nav-small-cap">
+								<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+								<span class="hide-menu">Home</span>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./index.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-layout-dashboard"></i>
+									</span>
+									<span class="hide-menu">Dashboard</span>
+								</a>
+							</li>
+							<li class="nav-small-cap">
+								<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+								<span class="hide-menu">Mangements</span>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="" aria-expanded="false">
+									<span>
+										<i class="ti ti-article"></i>
+									</span>
+									<span class="hide-menu">Gestion Des Voyages</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-alert-circle"></i>
+									</span>
+									<span class="hide-menu">gestion des evenements
+									</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-cards"></i>
+									</span>
+									<span class="hide-menu">gestion des hebergements</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-file-description"></i>
+									</span>
+									<span class="hide-menu">gestion de forum</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-typography"></i>
+									</span>
+									<span class="hide-menu">gestion des utilisateurs</span>
+								</a>
+							</li>
+							<li class="nav-small-cap">
+								<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+								<span class="hide-menu">AUTH</span>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-login"></i>
+									</span>
+									<span class="hide-menu">Login</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-user-plus"></i>
+									</span>
+									<span class="hide-menu">Register</span>
+								</a>
+							</li>
+						</nav>
+						<!-- End Sidebar navigation -->
+					</div>
+					<!-- End Sidebar scroll-->
+				</aside>
+				<!--  Sidebar End -->
+				<!-- Main Content -->
+<div class="body-wrapper">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="col-lg-8 d-flex align-items-stretch">
+                <div class="card w-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Edit User</h5>
+                        {{ form_start(form, {'attr': {'class': 'user-form'}}) }}
+                            <div class="mb-3">
+                                {{ form_label(form.email) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.plainPassword, 'Password') }}
+                                {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.plainPassword) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.ImagePath) }}
+                                {{ form_widget(form.ImagePath, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.ImagePath) }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        {{ form_end(form) }}
+                        <a href="{{ path('app_admin_user_index') }}" class="btn btn-secondary">Back to list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

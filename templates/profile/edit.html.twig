@@ -2,19 +2,88 @@
 
 {% block title %}Edit User{% endblock %}
 
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit User - Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/assetsFB/images/logos/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('/assetsFB/css/styles.css') }}" />
+
+    
+{% endblock %}
+
 {% block body %}
+<div class="edit-user-form">
     <h1>Edit User</h1>
 
     {{ form_errors(form) }}
 
     {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword, {
-            label: 'Password'
-        }) }}
-                <button type="submit" class="btn">edit</button>
+        <div class="form-group">
+            {{ form_label(form.email, 'Email', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email'}}) }}
+        </div>
 
-        {{ form_row(form.ImagePath) }}
+        <div class="form-group">
+            {{ form_label(form.plainPassword, 'Password', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Enter your password'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.ImagePath, 'Profile Image', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.ImagePath, {'attr': {'class': 'form-control', 'placeholder': 'Upload your profile image'}}) }}
+        </div>
 
     {{ form_end(form) }}
+</div>
+<style>
+        /* Custom CSS for form styling */
+        .edit-user-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 {% endblock %}
