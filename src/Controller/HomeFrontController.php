@@ -8,7 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\PdfGeneratorService;
 use App\Entity\Evenement;
 use Doctrine\ORM\EntityManagerInterface;
-
+use App\Repository\CategorieEventRepository;
+use App\Entity\CategorieEvent;
+use App\Repository\EvenementRepository;
 class HomeFrontController extends AbstractController
 {
     #[Route('/', name: 'app_home_front')]
@@ -77,7 +79,32 @@ class HomeFrontController extends AbstractController
         return $this->file('event_export.xlsx');
     }
 
+    #[Route('/stats', name: 'app_stats')]
+    public function statistiquess(EvenementRepository $transprepo)
+    {
+        $transprepo = $transprepo->findAll();
 
+        $transpId = [];
+        
+        foreach( $transprepo as $transport_reservations){
+            $transpId[] = $transport_reservations->getCategorie()->getNom();
+            $occurrences = array_count_values($transpId);
+        }
+
+
+        return $this->render('stats.html.twig', [
+            'transpId' => json_encode($transpId),
+            'transpIdCount' => json_encode($occurrences),
+        ]);
+    }
+
+    #[Route('/localisation', name: 'app_localisation')]
+    public function localisation(): Response
+    {
+        return $this->render('localisation.html.twig', [
+            'controller_name' => 'TransportController',
+        ]);
+    }
     
 
 }
