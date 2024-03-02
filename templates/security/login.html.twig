@@ -44,7 +44,7 @@
                         Remeber this Device
                       </label>
                     </div>
-                    <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
+                    <a class="text-primary fw-bold" href="{{ path('app_forgot_password_request') }}">Forgot Password ?</a>
                   </div>
                 <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
