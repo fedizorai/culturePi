@@ -203,9 +203,7 @@ class EvenementController extends AbstractController
     ]);
     }
    
-
     
-
 }
     
   
