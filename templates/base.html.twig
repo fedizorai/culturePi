@@ -72,14 +72,39 @@ https://templatemo.com/tm-580-woox-travel
                     </a>
                     <!-- *** Logo End *** -->
                     <!-- *** Menu Start *** -->
-                    <ul class="nav">
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="#">Voyage</a></li>
-                        <li><a href="#">Go to Deals</a></li>
-                        <li><a href="#">Hebergement</a></li>
-                        <li><a href="#">Review</a></li>
-                        <li><a href="#">Login</a></li>
-                    </ul>   
+   <ul class="nav">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#">Voyage</a></li>
+    <li><a href="#">Go to Deals</a></li>
+    <li><a href="#">Hebergement</a></li>
+    <li><a href="#">Review</a></li>
+    {% if app.user %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" id="profileDropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+            <ul class="dropdown-menu" id="profileMenu">
+                <li><a href="{{ path('app_profile_show') }}"  style="color: black;">Profile</a></li>
+                <li><a href="{{ path('app_logout') }}"  style="color: black;">Logout</a></li>
+            </ul>
+        </li>
+    {% else %}
+        <li><a href="{{ path('app_login') }}">Login</a></li>
+    {% endif %}
+</ul>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const profileDropdown = document.getElementById('profileDropdown');
+        const profileMenu = document.getElementById('profileMenu');
+
+        profileDropdown.addEventListener('mouseenter', function() {
+            profileMenu.style.display = 'block';
+        });
+
+        profileMenu.addEventListener('mouseleave', function() {
+            profileMenu.style.display = 'none';
+        });
+    });
+</script>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -263,12 +288,12 @@ https://templatemo.com/tm-580-woox-travel
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
-          <h2>Are You Looking To Travel ?</h2>
-          <h4>Make A Reservation By Clicking The Button</h4>
+          <h2>Do tou have a problem ?</h2>
+          <h4>Contact us</h4>
         </div>
         <div class="col-lg-4">
           <div class="border-button">
-            <a href="#">Book Yours Now</a>
+            <a href="{{ path('app_contact') }}">Contact us</a>
           </div>
         </div>
       </div>
