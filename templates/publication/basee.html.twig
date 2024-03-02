@@ -55,6 +55,20 @@
   .content {
     font-size: 20px; /* Taille de police plus grande pour le contenu */
   }
+  .like-btn,
+.dislike-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px; /* Ajustez la taille de police selon vos besoins */
+    color: #000; /* Couleur des icônes */
+}
+
+.like-btn:hover,
+.dislike-btn:hover {
+    color: #00f; /* Couleur au survol */
+}
+
   </style>
   {% endblock %}
   <!--
@@ -194,8 +208,11 @@ https://templatemo.com/tm-580-woox-travel
             <p class="username"><strong>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</strong></p>
             <p class="date">{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</p>
             <p class="content">{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</p>
-            <button class="like-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}">Like</button>
-<button class="dislike-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}">Dislike</button>
+           <button class="like-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}"><i class="fas fa-thumbs-up"></i></button>
+           <span class="like-count">{{ p_u_b_l_i_c_a_t_i_o_n.likes }}</span>
+
+<button class="dislike-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}"><i class="fas fa-thumbs-down"></i></button>
+
 
 
             <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_edit', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}">Edit</a>
@@ -216,6 +233,7 @@ https://templatemo.com/tm-580-woox-travel
     $(document).ready(function() {
     $('.like-btn').click(function() {
         var publicationId = $(this).data('publication-id');
+         var likeButton = $(this); // Stockez une référence au bouton Like
 
         $.ajax({
             type: 'POST',
@@ -223,18 +241,26 @@ https://templatemo.com/tm-580-woox-travel
             success: function(response) {
                 console.log(response);
                 // Rafraîchir la page ou effectuer toute autre action après le like
+                var likeCountElement = likeButton.next('.like-count'); // Utilisez la variable likeButton ici
+                var currentLikes = parseInt(likeCountElement.text());
+                likeCountElement.text(currentLikes + 1);
             }
         });
     });
 
         $('.dislike-btn').click(function() {
             var publicationId = $(this).data('publication-id');
+              var dislikeButton = $(this); // Stockez une référence au bouton Dislike
+
             $.ajax({
                 type: 'POST',
         url: '{{ path('dislike', {'id': '__publicationId__'}) }}'.replace('__publicationId__', publicationId),
                 success: function(response) {
                     console.log(response);
                     // Rafraîchir la page ou effectuer toute autre action après le dislike
+                   var dislikeCountElement = dislikeButton.siblings('.dislike-count'); // Utilisez la classe dislike-count pour sélectionner l'élément du nombre de dislikes
+            var currentDislikes = parseInt(dislikeCountElement.text());
+            dislikeCountElement.text(response.dislikes);
                 }
             });
         });
