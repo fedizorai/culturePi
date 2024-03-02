@@ -6,6 +6,89 @@
   <title>Dashboard</title>
   <link rel="shortcut icon" type="image/png" href="../assetsFB/images/logos/dark-logo.png" />
   <link rel="stylesheet" href="../assetsFB/css/styles.min.css" />
+  <style>
+  /* Style pour le tableau des publications */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody+tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+.table-sm th,
+.table-sm td {
+  padding: 0.3rem;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-primary,
+.table-primary>th,
+.table-primary>td {
+  background-color: #b8daff;
+}
+
+.table-primary th,
+.table-primary td,
+.table-primary thead th,
+.table-primary tbody+tbody {
+  border-color: #7abaff;
+}
+
+/* Style pour les boutons d'action */
+.action-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.action-btn:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+  </style>
 </head>
 <body>
 
@@ -176,9 +259,7 @@
                 <td>{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</td>
                 <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</td>
                 <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERID }}</td>
-                <td>    {{ include('publication/deleteback.html.twig') }}</a></td>
-
-                
+                <td>    {{ include('publication/deleteback.html.twig') }}</a></td>s
               </tr>
               {% else %}
               <tr>
