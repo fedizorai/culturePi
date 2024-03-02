@@ -194,6 +194,10 @@ https://templatemo.com/tm-580-woox-travel
             <p class="username"><strong>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</strong></p>
             <p class="date">{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</p>
             <p class="content">{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</p>
+            <button class="like-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}">Like</button>
+<button class="dislike-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}">Dislike</button>
+
+
             <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_edit', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}">Edit</a>
             <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_showw', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}" class="btn btn-primary">Comment</a>
           </div>
@@ -207,40 +211,36 @@ https://templatemo.com/tm-580-woox-travel
 </div>
 
 <!-- Scripts JavaScript -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('.btn-like').click(function() {
-        var publicationId = $(this).closest('.publication-content').data('publication-id');
+    $(document).ready(function() {
+    $('.like-btn').click(function() {
+        var publicationId = $(this).data('publication-id');
+
         $.ajax({
-            method: 'POST',
-            url: '/like', // Mettez l'URL correcte de votre endpoint de like
-            data: { publicationId: publicationId },
+            type: 'POST',
+        url: '{{ path('like', {'id': '__publicationId__'}) }}'.replace('__publicationId__', publicationId),
             success: function(response) {
-                // Gérer la réponse du serveur après un like réussi
-            },
-            error: function(xhr, status, error) {
-                // Gérer les erreurs en cas d'échec de la requête
+                console.log(response);
+                // Rafraîchir la page ou effectuer toute autre action après le like
             }
         });
     });
 
-    $('.btn-dislike').click(function() {
-        var publicationId = $(this).closest('.publication-content').data('publication-id');
-        $.ajax({
-            method: 'POST',
-            url: '/dislike', // Mettez l'URL correcte de votre endpoint de dislike
-            data: { publicationId: publicationId },
-            success: function(response) {
-                // Gérer la réponse du serveur après un dislike réussi
-            },
-            error: function(xhr, status, error) {
-                // Gérer les erreurs en cas d'échec de la requête
-            }
+        $('.dislike-btn').click(function() {
+            var publicationId = $(this).data('publication-id');
+            $.ajax({
+                type: 'POST',
+        url: '{{ path('like', {'id': '__publicationId__'}) }}'.replace('__publicationId__', publicationId),
+                success: function(response) {
+                    console.log(response);
+                    // Rafraîchir la page ou effectuer toute autre action après le dislike
+                }
+            });
         });
     });
-});
 </script>
+
 
 
 
@@ -285,7 +285,7 @@ $(document).ready(function () {
       <div class="row">
         <div class="col-lg-12">
           <br> <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> <a
-            href="https://themewagon.com target="_blank">ThemeWagon</a></p>
+            href="https://themewagon.com "target="_blank">ThemeWagon</a></p>
         </div>
       </div>
     </div>
@@ -300,7 +300,7 @@ $(document).ready(function () {
 
   <script src="{{asset('assets/js/isotope.min.js')}}"></script>
   <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
-  <script src="{{asset('assets/js/wow.js')}}"></script>
+ 
   <script src="{{asset('assets/js/tabs.js')}}"></script>
   <script src="{{asset('assets/js/popup.js')}}"></script>
   <script src="{{asset('assets/js/custom.js')}}"></script>

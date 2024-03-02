@@ -134,34 +134,31 @@ class PUBLICATIONController extends AbstractController
 
     #[Route('/like/{id}', name:'like', methods:['POST'])]
    
-    public function like(Request $request, PUBLICATION $pUBLICATION): Response
+    public function like(Request $request, Publication $publication): Response
     {
-        // Traitez la logique pour enregistrer le like pour cette publication
-        // Par exemple, vous pouvez incrémenter un compteur de likes dans votre entité Publication
-        $pUBLICATION->incrementLikes();
-        
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($pUBLICATION);
-        $entityManager->flush();
-
-        // Réponse JSON indiquant que le like a été enregistré avec succès
-        return new JsonResponse(['success' => true]);
+        try {
+            $publication->incrementLikes();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($publication);
+            $entityManager->flush();
+    
+            // Renvoyer une réponse JSON indiquant le succès
+            return new JsonResponse(['message' => 'success']);
+        } catch (\Exception $e) {
+            // Capturer les exceptions et renvoyer une réponse d'erreur
+            return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
-
     #[Route('/dislike/{id}', name:'dislike', methods:['POST'])]
     
-    public function dislike(Request $request, PUBLICATION $pUBLICATION): Response
+    public function dislike(Request $request, Publication $publication): Response
     {
-        // Traitez la logique pour enregistrer le dislike pour cette publication
-        // Par exemple, vous pouvez incrémenter un compteur de dislikes dans votre entité Publication
-        $pUBLICATION->incrementDislikes();
-        
+        $publication->decrementLikes();
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($pUBLICATION);
+        $entityManager->persist($publication);
         $entityManager->flush();
 
-        // Réponse JSON indiquant que le dislike a été enregistré avec succès
-        return new JsonResponse(['success' => true]);
+        return new Response('success');
     }
     
 }
