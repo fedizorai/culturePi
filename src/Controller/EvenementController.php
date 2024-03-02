@@ -57,6 +57,8 @@ class EvenementController extends AbstractController
             $entityManager->persist($evenement);
             $entityManager->flush();
 
+            flash()->addSuccess('"Your event has been successfully added!"');
+
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
 

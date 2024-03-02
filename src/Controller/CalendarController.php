@@ -33,6 +33,8 @@ class CalendarController extends AbstractController
             $entityManager->persist($calendar);
             $entityManager->flush();
 
+            flash()->addSuccess('Your calendar has been modified successfully');
+            
             return $this->redirectToRoute('app_categorie_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
