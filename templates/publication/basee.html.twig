@@ -231,7 +231,7 @@ https://templatemo.com/tm-580-woox-travel
             var publicationId = $(this).data('publication-id');
             $.ajax({
                 type: 'POST',
-        url: '{{ path('like', {'id': '__publicationId__'}) }}'.replace('__publicationId__', publicationId),
+        url: '{{ path('dislike', {'id': '__publicationId__'}) }}'.replace('__publicationId__', publicationId),
                 success: function(response) {
                     console.log(response);
                     // Rafraîchir la page ou effectuer toute autre action après le dislike

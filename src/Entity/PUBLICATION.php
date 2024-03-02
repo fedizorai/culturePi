@@ -37,11 +37,15 @@ class PUBLICATION
     #[ORM\OneToMany(mappedBy: 'PUB', targetEntity: COMMENTAIRE::class)]
     private Collection $LISTCOMMENTAIRE;
 
+    #[ORM\Column(type: 'integer')]
+    private ?int $likes = 0; // Ajout de l'attribut likes
+
     public function __construct()
     {
         $this->COMMENTAIRESLIST = new ArrayCollection();
         $this->LISTCOMMENTAIRE = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {
@@ -96,6 +100,27 @@ class PUBLICATION
         $this->USERID = $USERID;
 
         return $this;
+    }
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function incrementLikes(): void
+    {
+        $this->likes++;
+    }
+
+    public function decrementLikes(): void
+    {
+        $this->likes--;
     }
 
     /**
