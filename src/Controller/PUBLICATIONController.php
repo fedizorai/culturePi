@@ -158,7 +158,8 @@ class PUBLICATIONController extends AbstractController
         $entityManager->persist($publication);
         $entityManager->flush();
 
-        return new Response('success');
+        return new Response('Dislike success', Response::HTTP_OK);
+
     }
     
 }

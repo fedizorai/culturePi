@@ -68,6 +68,10 @@
 .dislike-btn:hover {
     color: #00f; /* Couleur au survol */
 }
+.like-count {
+    color: black;
+}
+
 
   </style>
   {% endblock %}
@@ -199,6 +203,7 @@ https://templatemo.com/tm-580-woox-travel
 
 <!-- Votre code HTML pour la boucle de publication -->
 <div class="container">
+
   <div class="row justify-content-center">
     <div class="col-lg-8">
       {% for p_u_b_l_i_c_a_t_i_o_n in p_u_b_l_i_c_a_t_i_o_ns %}
@@ -261,6 +266,7 @@ https://templatemo.com/tm-580-woox-travel
                    var dislikeCountElement = dislikeButton.siblings('.dislike-count'); // Utilisez la classe dislike-count pour sélectionner l'élément du nombre de dislikes
             var currentDislikes = parseInt(dislikeCountElement.text());
             dislikeCountElement.text(response.dislikes);
+            
                 }
             });
         });
