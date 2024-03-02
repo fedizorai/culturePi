@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 
 
 use App\Repository\PdfGeneratorServiceRepository;
@@ -26,7 +27,7 @@ class EvenementController extends AbstractController
 {
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $evenementRepository): Response
-    {
+    {     
         return $this->render('evenement/index.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
@@ -119,12 +120,22 @@ class EvenementController extends AbstractController
     
 
     #[Route('/', name: 'app_evenement_indexx', methods: ['GET','POST'])]
-    public function indexx(EntityManagerInterface $entityManager,EvenementRepository $evenementRepository,Request $request): Response
-    {
+    public function indexx(EntityManagerInterface $entityManager,EvenementRepository $evenementRepository,Request $request,PaginatorInterface $paginator): Response
+    {    
+
         $evenements = $entityManager
         ->getRepository(Evenement::class)
         ->findAll();
+        
+        
 
+        $evenements = $paginator->paginate(
+            $evenements, /* query NOT result */
+            $request->query->getInt('page', 1),
+            3
+        );
+
+        
         /////////
         $back = null;
         
@@ -190,6 +201,8 @@ class EvenementController extends AbstractController
     ]);
     }
    
+
+    
 
 }
     

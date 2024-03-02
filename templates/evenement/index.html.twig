@@ -106,7 +106,9 @@
             </div>
             
             </div>
+            
 {% for evenement in evenements %}
+
 
     {# List of available images #}
     {% set imageList = [
@@ -176,6 +178,7 @@
 
         {% endfor %}
 
+
         </div>
     </div>
     </div>
@@ -198,6 +201,9 @@
       </div>
     </div>
   </footer>
+  
+                  {# {{ knp_pagination_render(evenements) }} #}
 
+    
 {% endblock %}
 
