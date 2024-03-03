@@ -216,12 +216,10 @@
                     <p class="mb-0 fw-normal">{{ reservation.Voyage.title }}</p>
                 </td>
 				<td class="border-bottom-0">
-                <div class="d-flex align-items-center gap-2">
-                    <a href="{{ path('qrcodegenerate', {'id': reservation.id}) }}" class="me-2">
-                        QR
-                    </a>
-                    </div>
-            </td>
+            <a href="{{ path('reservation_pdf', {'id': reservation.id}) }}" class="btn btn-danger">
+                PDF
+            </a>
+        </td>
                 <th class="border-bottom-0">
                     <div class="d-flex align-items-center gap-2">
                         <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="me-2">

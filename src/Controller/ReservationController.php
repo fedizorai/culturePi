@@ -15,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx as WriterXlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
 use App\Entity\Voyage;
-
+use Dompdf\Dompdf;
 //QR CODE
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
@@ -36,6 +36,49 @@ class ReservationController extends AbstractController
         ]);
     }
 
+
+    #[Route('/{id}/pdf', name: 'reservation_pdf')]
+    public function generatePdf(Reservation $reservation): Response
+    {
+        // Get reservation data
+        $reservationData = [
+            'id' => $reservation->getId(),
+            'nbrtickets' => $reservation->getNbrtickets(),
+            'iduser' => $reservation->getIduser(),
+            'paiement' => $reservation->getPaiement(),
+            'voyage' => [
+                'id' => $reservation->getVoyage()->getId(),
+                'title' => $reservation->getVoyage()->getTitle(),
+                'location' => $reservation->getVoyage()->getLocation(),
+                'duration' => $reservation->getVoyage()->getDuration(),
+                'voyageimage' => $reservation->getVoyage()->getVoyageimage(),
+                // Add more reservation details if needed
+            ],
+        ];
+
+        // Render PDF content
+        $pdfContent = $this->renderView('reservation/pdf.html.twig', [
+            'reservation' => $reservationData,
+        ]);
+
+        // Create PDF
+        $pdf = new Dompdf();
+        $pdf->loadHtml($pdfContent);
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render PDF
+        $pdf->render();
+
+        // Return PDF response
+        return new Response(
+            $pdf->output(),
+            Response::HTTP_OK,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="reservation_' . $reservation->getId() . '.pdf"',
+            ]
+        );
+    }
     #[Route('/show', name: 'app_reservation_showres', methods: ['GET'])]
     public function showres(ReservationRepository $reservationRepository): Response
     {
