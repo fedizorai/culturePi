@@ -242,50 +242,45 @@
             {% block body %}
     <h1>PUBLICATIONS</h1>
     <table class="table">
-        <thead>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>CONTENUPUB</th>
+            <th>DATEPUB</th>
+            <th>USERNAME</th>
+            <th>USERID</th>
+            <th>ACTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p_u_b_l_i_c_a_t_i_o_n in p_u_b_l_i_c_a_t_i_o_ns %}
             <tr>
-                <th>Id</th>
-                <th>CONTENUPUB</th>
-                <th>DATEPUB</th>
-                <th>USERNAME</th>
-                <th>USERID</th>
-                <th>ACTION</th>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.id }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERID }}</td>
+                <td>
+                    {% if qrCodeData is defined and qrCodeData|length > 0 %}
+                        <div class="col">
+                            <img src="{{ qrCodeData[p_u_b_l_i_c_a_t_i_o_n.id] }}" />
+                        </div>
+                    {% else %}
+                        <div class="col">
+                            No QR Code available
+                        </div>
+                    {% endif %}
+                </td>
+                <td>{{ include('publication/deleteback.html.twig') }}</td>
             </tr>
-        </thead>
-        <tbody>
-            {% for p_u_b_l_i_c_a_t_i_o_n in p_u_b_l_i_c_a_t_i_o_ns %}
-                <tr>
-                    <td>{{ p_u_b_l_i_c_a_t_i_o_n.id }}</td>
-                    <td>{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</td>
-                    <td>{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</td>
-                    <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</td>
-                    <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERID }}</td>
-            <td>
-           {% if qrCodeData is defined and qrCodeData|length > 0 %}
-    {% for publication in p_u_b_l_i_c_a_t_i_o_ns %}
-        <div class="col">
-            <img src="{{ qrCodeData[publication.id] }}" />
-        </div>
-    {% endfor %}
-{% else %}
-    <div class="col">
-        No QR Code available
-    </div>
-{% endif %}
+        {% else %}
+            <tr>
+                <td colspan="6">No records found</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-
-
-
-                    </td>
-                    <td> {{ include('publication/deleteback.html.twig') }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6">No records found</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 
 
     <!-- End of your publications -->
