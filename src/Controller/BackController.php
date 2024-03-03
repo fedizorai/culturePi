@@ -67,15 +67,19 @@ class BackController extends AbstractController
             ->setMargin(0)
             ->setForegroundColor(new Color(0, 0, 0))
             ->setBackgroundColor(new Color(255, 255, 255));
-
+            $logo = Logo::create('assets/images/logo.png')
+            ->setResizeToWidth(60);
         $label = Label::create('')->setFont(new NotoSans(8));
 
         // Associer le QR code à l'ID de la publication
+        $qrCodes['img'] = $writer->write($qrCode, $logo)->getDataUri();
+        $qrCode->setSize(200)->setForegroundColor(new Color(0, 0, 0))->setBackgroundColor(new Color(255, 255, 255));
         $qrCodeData[$publication->getId()] = $writer->write(
             $qrCode,
-            null,
+            $logo,
             $label->setText('Publication ' . $publication->getId())
         )->getDataUri();
+        
         
     }
 
