@@ -25,13 +25,11 @@ class BackController extends AbstractController
         ]);
     }
     #[Route('/BACKK', name: 'app_dashboardd')]
-    public function testt(PUBLICATIONRepository $pUBLICATIONRepository,COMMENTAIRERepository $cOMMENTAIRERepository): Response
-    {    $commentaires = $cOMMENTAIRERepository->findAll();
-
+    public function testt(PUBLICATIONRepository $pUBLICATIONRepository): Response
+    {
         return $this->render('publication/index2.html.twig', [
             'p_u_b_l_i_c_a_t_i_o_ns' => $pUBLICATIONRepository->findAll(),
-            'c_o_m_m_e_n_t_a_i_r_es' => $commentaires,
-
+            
 
         ]);
     }

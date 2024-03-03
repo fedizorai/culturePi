@@ -270,39 +270,7 @@
     </table>
     <!-- End of your publications -->
 
-    <h1>COMMENTAIRES</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Contenu</th>
-                <th>Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for commentaire in c_o_m_m_e_n_t_a_i_r_es %}
-                <tr>
-                    <td>{{ commentaire.id }}</td>
-                    <td>{{ commentaire.NAME }}</td>
-                    <td>{{ commentaire.CONTENUCOM }}</td>
-                    <td>{{ commentaire.DATECOM|date('Y-m-d ') }}</td>
-                    <td>
-                        <div class="border-button">
-                            <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_show', {'id': commentaire.id}) }}">Show</a>
-                            <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_edit', {'id': commentaire.id}) }}">Edit</a>
-                        </div>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">No comments found</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <!-- End of your comments -->
+    
 {% endblock %}
 
 
