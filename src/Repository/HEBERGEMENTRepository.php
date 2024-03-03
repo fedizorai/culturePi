@@ -20,7 +20,24 @@ class HEBERGEMENTRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, HEBERGEMENT::class);
     }
-
+    public function findByType($value): array
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.type = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+       ;
+    }
+    public function findByAdresse($value): array
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.adresse = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+       ;
+    }
 //    /**
 //     * @return HEBERGEMENT[] Returns an array of HEBERGEMENT objects
 //     */

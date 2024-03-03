@@ -10,7 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 
@@ -71,7 +72,32 @@ class ReservhebergementController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/ExportPdf/{id}', name: 'app_pdf', methods: ['GET', 'POST'])]
+    public function ExportPdf(Reservhebergement $reservhebergement) :Response
+    {
+          
+          $options = new Options();
+        $options->set('defaultFont', 'Arial');
 
+        $dompdf = new Dompdf($options);
+        $html = $this->renderView('reservhebergement/pdf.html.twig', [
+            // Pass any necessary data to your Twig template
+            'reserv' => $reservhebergement,
+        ]);
+
+        $dompdf->loadHtml($html);
+
+        // (Optional) Set paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to browser (inline view)
+        return new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
+    }
     #[Route('/{id}', name: 'app_reservhebergement_delete', methods: ['POST'])]
     public function delete(Request $request, Reservhebergement $reservhebergement, EntityManagerInterface $entityManager): Response
     {

@@ -1,1 +1,401 @@
+{% extends './dashboard/base.html.twig' %}
+
+{% block title %}CategorieEvent index{% endblock %}
+
+{% block body %}
+<style>
+        /* Custom styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+             margin-top: 30px;
+            margin-bottom: 20px;
+         
+        }
+        .table th, .table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table tbody tr:hover {
+            background-color: #ddd;
+        }
+        .actions a {
+            margin-right: 5px;
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        .actions a:hover {
+            color: #0056b3;
+        }
+        .no-records {
+            text-align: center;
+            color: #777;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .filter-container form {
+            margin: 0 10px;
+        }
+
+        select, input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input[type="submit"]:focus {
+            outline: none;
+            border-color: #66afe9;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+  <h1>CategorieEvent index</h1>
+
+
+<div>
+<div class="filter-container" style="margin-top:45px;">
+        
+            <h3>Type</h3>
+            <form action="{{ path('app_filtre_type') }}" method="POST">
+                <select id="filtre" name="filtre">
+                    <option value="hotel">hotel</option>
+                    <option value="motel">motel</option>
+                    <option value="maison d'hote">maison d'hote</option>
+                </select>
+                <input type="submit" value="Filtre" />
+            </form>
+        </div>
+        <div class="filter-container" >
+        
+            <h3>Adresse</h3>
+            <form action="{{path('app_filtre_adresse')}}" method="POST">
+                <select id="filtre" name="filtre_adresse">
+                    <option value="Tunis">Tunis</option>
+                    <option value="Sousse">Sousse</option>
+                    <option value="Alger">Alger</option>
+                    <option value="Caire">Caire</option>
+                    <option value="Marrakesh">Marrakesh</option>
+                    <option value="Barcelone">Barcelone</option>
+                    <option value="Paris">Paris</option>
+                    <option value="Amsterdam">Amsterdam</option>
+                </select>
+                <input type="submit" value="Filtre" />
+            </form>
+        </div>
+                <table class="table">
+        <thead>
+            <tr>
+                <th>Id_hebergement</th>
+                <th>Adresse</th>
+                <th>Type</th>
+                <th>Nb_chambre</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hebergement in hebergements %}
+            <tr>
+                <td>{{ hebergement.id_hebergement }}</td>
+                <td>{{ hebergement.adresse }}</td>
+                <td>{{ hebergement.type }}</td>
+                <td>{{ hebergement.nbChambre }}</td>
+                <td>{{ hebergement.prix }}</td>
+                <td >
+                    <a href="{{ path('app_hebergement_show', {'id_hebergement': hebergement.id_hebergement}) }}" class="btn btn-info btn-sm" >show</a>
+                    <a href="{{ path('app_hebergement_edit', {'id_hebergement': hebergement.id_hebergement}) }}"class="btn btn-info btn-sm"  >edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+
+<div style="text-align: center;">
+    <a href="{{ path('app_hebergement_new') }}" class="btn btn-info btn-sm">Create new</a>
+</div>
+
+    <div id="stats-container">
+    <div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">Nombre d'Hebergements</div>
+      <div class="card-body">
+        <canvas id="bar-chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">Hebergement vs Reservation</div>
+      <div class="card-body">
+        <canvas id="pie-chart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">Hebergement Par Prix</div>
+  <div class="card-body">
+    <canvas id="line-chart"></canvas>
+  </div>
+  <div class="card-header">Hebergement Par nbr Chambre</div>
+  <div class="card-body">
+    <canvas id="line-chartS"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // Bar chart
+  var ctx1 = document.getElementById('bar-chart').getContext('2d');
+  var chart1 = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: ['Hebergements', 'Reservations'],
+      datasets: [{
+        label: 'S/R',
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+        borderWidth: 1,
+        data: [{{ hebergements|length }}, {{ reservhebergements|length }}]
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            fontColor: '#ccc'
+          },
+          gridLines: {
+            color: '#ccc'
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontColor: '#ccc'
+          },
+          gridLines: {
+            color: '#ccc'
+          }
+        }]
+      },
+      legend: {
+        labels: {
+          fontColor: '#ccc'
+        }
+      }
+    }
+  });
+
+  // Pie chart
+  var ctx2 = document.getElementById('pie-chart').getContext('2d');
+  var chart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+      labels: ['Hebergements', 'Reservations'],
+      datasets: [{
+        label: 'Number',
+         backgroundColor: ['#d9534f', '#f0ad4e'],
+        borderColor: '#fff',
+         data: [{{ hebergements|length }}, {{ reservhebergements|length }}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Hebergement vs Reservations',
+        fontColor: '#ccc'
+      },
+      legend: {
+        labels: {
+          fontColor: '#ccc'
+        }
+        
+      }
+      
+    },width: 150,
+    height: 100
+  });
+  var ctx = document.getElementById('line-chart').getContext('2d');
+var chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [{% for hebergement in hebergements %}
+               '{{ hebergement.id_hebergement }}',
+             {% endfor %}],
+    datasets: [{
+      label: 'Prix Pour chaque Hebergement',
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      pointBackgroundColor: 'rgb(255, 99, 132)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)',
+      data: [{% for hebergement in hebergements %}{{ hebergement.prix }},{% endfor %}],
+      fill: false,
+    }]
+  },
+  options: {
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 20
+        },
+        gridLines: {
+          color: '#f0f0f0',
+          lineWidth: 1
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: function(value, index, values) {
+            return '$' + value;
+          }
+        },
+        gridLines: {
+          color: '#f0f0f0',
+          lineWidth: 1
+        }
+      }]
+    },
+    tooltips: {
+      mode: 'nearest',
+      intersect: false,
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label || '';
+          if (label) {
+            label += ': ';
+          }
+          label += '$' + tooltipItem.yLabel.toFixed(2);
+          return label;
+        }
+      }
+    }
+  }
+});
+
+var ctx = document.getElementById('line-chartS').getContext('2d');
+var chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [{% for hebergement in hebergements %}
+               '{{ hebergement.id_hebergement }}',
+             {% endfor %}],
+    datasets: [{
+      label: 'Hebergement  avec Chambre',
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      pointBackgroundColor: 'rgb(255, 99, 132)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)',
+      data: [{% for hebergement in hebergements %}{{ hebergement.nbchambre }},{% endfor %}],
+      fill: false,
+    }]
+  },
+  options: {
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 20
+        },
+        gridLines: {
+          color: '#f0f0f0',
+          lineWidth: 1
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: function(value, index, values) {
+            return '$' + value;
+          }
+        },
+        gridLines: {
+          color: '#f0f0f0',
+          lineWidth: 1
+        }
+      }]
+    },
+    tooltips: {
+      mode: 'nearest',
+      intersect: false,
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label || '';
+          if (label) {
+            label += ': ';
+          }
+          label += '$' + tooltipItem.yLabel.toFixed(2);
+          return label;
+        }
+      }
+    }
+  }
+});
+  </script>
+    </div>
+
+{% endblock %}
 

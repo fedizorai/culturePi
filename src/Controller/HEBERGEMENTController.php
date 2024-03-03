@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\HEBERGEMENT;
 use App\Form\HEBERGEMENTType;
 use App\Repository\HEBERGEMENTRepository;
+use App\Entity\Reservhebergement;
+use App\Form\ReservhebergementType;
+use App\Repository\ReservhebergementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,14 +23,16 @@ class HEBERGEMENTController extends AbstractController
     {
         return $this->render('hebergement/index.html.twig', [
             'hebergements' => $hEBERGEMENTRepository->findAll(),
+           
         ]);
     }
     
    #[Route('/afficher2', name: 'app_hebergement_index2', methods: ['GET'])]
-        public function index2(HEBERGEMENTRepository $hEBERGEMENTRepository): Response
+        public function index2(HEBERGEMENTRepository $hEBERGEMENTRepository,ReservhebergementRepository $reservhebergementRepository): Response
         {
             return $this->render('hebergement/index2.html.twig', [
                 'hebergements' => $hEBERGEMENTRepository->findAll(),
+                'reservhebergements' => $reservhebergementRepository->findAll(),
             ]);
         }
 
@@ -59,6 +64,28 @@ class HEBERGEMENTController extends AbstractController
             'form' => $form,
         ]);
     }
+    
+    #[Route('/filtreType', name: 'app_filtre_type', methods: ['GET' ,'POST'])]
+    public function filtre( HEBERGEMENTRepository $hEBERGEMENTRepository,ReservhebergementRepository $reservhebergementRepository,Request $request): Response
+    {
+        $filtre=$request->request->get('filtre');
+        
+        return $this->render('hebergement/index2.html.twig', [
+            'hebergements' => $hEBERGEMENTRepository->findByType($filtre),
+            'reservhebergements' => $reservhebergementRepository->findAll(),
+        ]);
+    }
+    #[Route('/filtreAdresse', name: 'app_filtre_adresse', methods: ['GET' ,'POST'])]
+    public function filtreC(HEBERGEMENTRepository $hEBERGEMENTRepository,ReservhebergementRepository $reservhebergementRepository,Request $request): Response
+    {
+        $filtre=$request->request->get('filtre_adresse');
+        
+        return $this->render('hebergement/index2.html.twig', [
+            'hebergements' => $hEBERGEMENTRepository->findByAdresse($filtre),
+            'reservhebergements' => $reservhebergementRepository->findAll(),
+        ]);
+    }
+
 
     #[Route('/{id_hebergement}', name: 'app_hebergement_show', methods: ['GET'])]
     public function show(HEBERGEMENT $hEBERGEMENT): Response
