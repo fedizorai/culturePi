@@ -96,6 +96,12 @@ class HEBERGEMENTController extends AbstractController
 
         return $this->redirectToRoute('app_hebergement_index', [], Response::HTTP_SEE_OTHER);
     }
-    
+     #[Route("/api/statistiques/adresses", name :"api_statistiques_adresses")]
+ 
+public function apiStatistiquesAdresses(HebergementRepository $hebergementRepository): JsonResponse
+{
+    $adresseStats = $hebergementRepository->findMostAddedAddresses();
+
+    return $this->json($adresseStats);
 }
 }
