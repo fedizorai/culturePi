@@ -1,0 +1,66 @@
+{% extends './dashboard/base.html.twig' %}
+
+{% block title %}CategorieEvent index{% endblock %}
+
+{% block body %}
+  <h1>CategorieEvent index</h1>
+
+
+<div>
+                <table class="table">
+        <thead>
+            <tr>
+                <th>Id_hebergement</th>
+                <th>Adresse</th>
+                <th>Type</th>
+                <th>Nb_chambre</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hebergement in hebergements %}
+            <tr>
+                <td>{{ hebergement.id_hebergement }}</td>
+                <td>{{ hebergement.adresse }}</td>
+                <td>{{ hebergement.type }}</td>
+                <td>{{ hebergement.nbChambre }}</td>
+                <td>{{ hebergement.prix }}</td>
+                <td >
+                    <a href="{{ path('app_hebergement_show', {'id_hebergement': hebergement.id_hebergement}) }}" class="btn btn-info btn-sm" >show</a>
+                    <a href="{{ path('app_hebergement_edit', {'id_hebergement': hebergement.id_hebergement}) }}"class="btn btn-info btn-sm"  >edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+
+<div style="text-align: center;">
+    <a href="{{ path('app_hebergement_new') }}" class="btn btn-info btn-sm">Create new</a>
+</div>
+
+    <div id="stats-container"></div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('{{ path('api_statistiques_adresses') }}')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('stats-container');
+                data.forEach(stat => {
+                    const row = document.createElement('div');
+                    row.textContent = `Adresse: ${stat.adresse}, Nombre d'ajouts: ${stat.adresseCount}`;
+                    container.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Erreur:', error));
+    });
+</script>
+{% endblock %}
+

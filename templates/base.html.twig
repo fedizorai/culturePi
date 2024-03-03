@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     {% block title %}
         <title>Culture vibes</title>
-        <link rel="shortcut icon" type="image/png" href="asset('assets/images/logo.png')" />
+        <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logo.png') }}">
     {% endblock %}
     {% block css %}
         <!-- Bootstrap core CSS -->
@@ -30,7 +28,7 @@ https://templatemo.com/tm-580-woox-travel
 -->
 
   </head>
- {% block body %}
+
 <body>
 
   <!-- *** Preloader Start *** -->
@@ -56,19 +54,24 @@ https://templatemo.com/tm-580-woox-travel
                 <nav class="main-nav">
                     <!-- *** Logo Start *** -->
                     <a href="#" class="logo">
-    <img src="asset('assets/images/logo.png')" alt="" style="width: 100px; height: 55px;">
+    <img src="{{ asset('assets/images/logo.png') }}" style="widht :100px ;height :55px;">
 </a>
                     </a>
                     <!-- *** Logo End *** -->
                     <!-- *** Menu Start *** -->
+                    {% block navbar %}
+                        
+                    
                     <ul class="nav">
                         <li><a href="#" class="active">Home</a></li>
                         <li><a href="#">Voyage</a></li>
-                        <li><a href="#">Go to Deals</a></li>
-                        <li><a href="#">Hebergement</a></li>
+                        <li><a href="#">Evenements</a></li>
+                        <li><a href="/afficher">Hebergement</a></li>
                         <li><a href="#">Review</a></li>
                         <li><a href="#">Login</a></li>
                     </ul>   
+
+                    {% endblock %}
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -247,7 +250,7 @@ https://templatemo.com/tm-580-woox-travel
   <!-- *** Main Banner Area End *** -->
   
  
-
+ {% block body %}
   <div class="call-to-action">
     <div class="container">
       <div class="row">

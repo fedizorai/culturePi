@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <h1>Reservation hebergement </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Id_hebergement</th>
+                <th>Nbr_personne</th>
+                <th>Duree</th>
+                <th>Type_paiement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservhebergement in reservhebergements %}
+            <tr>
+                <td>{{ reservhebergement.id }}</td>
+                <td>{{ reservhebergement.username }}</td>
+                <td>{{ reservhebergement.idHebergement }}</td>
+                <td>{{ reservhebergement.nbrPersonne }}</td>
+                <td>{{ reservhebergement.duree }}</td>
+                <td>{{ reservhebergement.typePaiement }}</td>
+                <td>
+                    <a href="{{ path('app_reservhebergement_show', {'id': reservhebergement.id}) }}">show</a>
+                    <a href="{{ path('app_reservhebergement_edit', {'id': reservhebergement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservhebergement_new') }}">Create new</a>
+{% endblock %}
