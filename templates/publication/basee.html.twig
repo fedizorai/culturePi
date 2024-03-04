@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  {% block title %}
+  <title>Culture vibes</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
+  {% endblock %}
+  {% block css %}
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/templatemo-woox-travel.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <style>
+    .publication-content {
+      background-color: #f2f3f5; /* Couleur de fond pour le cadre */
+      border: 1px solid #ccc;
+      border-radius: 5px; /* Coins arrondis pour le cadre */
+      padding: 15px; /* Ajoute de l'espace intérieur */
+      margin-bottom: 20px; /* Ajoute de l'espace en bas */
+    }
+
+    .publication-content p {
+      margin-bottom: 10px; /* Ajoute de l'espace entre les paragraphes */
+    }
+
+    .publication-content a {
+      color: #385898; /* Couleur du lien */
+      text-decoration: none; /* Supprime le soulignement du lien */
+      font-weight: bold; /* Rend le texte en gras */
+    }
+
+    .publication-content a:hover {
+      text-decoration: underline; /* Souligne le lien au survol */
+    }
+    .username {
+    font-size: 18px; /* Taille de police plus petite pour le nom d'utilisateur */
+  }
+
+  .date {
+    font-size: 14px; /* Taille de police plus petite pour la date */
+  }
+
+  .content {
+    font-size: 20px; /* Taille de police plus grande pour le contenu */
+  }
+  .like-btn,
+.dislike-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px; /* Ajustez la taille de police selon vos besoins */
+    color: #000; /* Couleur des icônes */
+}
+
+.like-btn:hover,
+.dislike-btn:hover {
+    color: #00f; /* Couleur au survol */
+}
+.like-count {
+    color: black;
+}
+
+
+  </style>
+  {% endblock %}
+  <!--
+
+TemplateMo 580 Woox Travel
+
+https://templatemo.com/tm-580-woox-travel
+
+-->
+
+</head>
+
+{% block body %}
+{% if app.user %}
+    {% if 'ROLE_USER' in app.user.roles  %}
+<body>
+
+  <!-- * Preloader Start * -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- * Preloader End * -->
+
+  <!-- * Header Area Start * -->
+
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- * Logo Start * -->
+            <a href="index.html" class="logo">
+              <img src="assets/images/logo.png" alt="" style="width: 100px; height: 55px;">
+            </a>
+            <!-- * Logo End * -->
+            <!-- * Menu Start * -->
+            <ul class="nav">
+            <li><a href="{{ path('app_home_front') }}" >Home</a></li>
+                        <li><a href="{{ path('app_voyage_index') }}">Voyage</a></li>
+                        <li><a href="{{ path('app_evenement_index') }}">Evenements</a></li>
+                        <li><a href="#">Hebergement</a></li>
+                        <li><a href="{{ path('app_testt') }}" class="active">Review</a></li>
+                         {% if app.user %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" id="profileDropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+            <ul class="dropdown-menu" id="profileMenu">
+                <li><a href="{{ path('app_profile_show') }}"  style="color: black;">Profile</a></li>
+                <li><a href="{{ path('app_logout') }}"  style="color: black;">Logout</a></li>
+            </ul>
+        </li>
+    {% else %}
+        <li><a href="{{ path('app_login') }}">Login</a></li>
+    {% endif %}
+            
+            </ul>
+             <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const profileDropdown = document.getElementById('profileDropdown');
+        const profileMenu = document.getElementById('profileMenu');
+
+        profileDropdown.addEventListener('mouseenter', function() {
+            profileMenu.style.display = 'block';
+        });
+
+        profileMenu.addEventListener('mouseleave', function() {
+            profileMenu.style.display = 'none';
+        });
+    });
+</script>  
+    
+    
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+            <!-- * Menu End * -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- * Header Area End * -->
+
+  <!-- * Main Banner Area Start * -->
+
+  <section id="section-1">
+    <div class="content-slider">
+      <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
+
+      <div class="slider">
+        <div id="top-banner-1" class="banner">
+          <div class="banner-inner-wrapper header-text">
+            <div class="main-caption">
+              <h2></h2>
+              <h1>Add your own post</h1>
+              <div class="border-button"><a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_new') }}">FEEL FREE</a></div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="more-info">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-user"></i>
+<h4><span>Total Publications:</span><br>{{ p_u_b_l_i_c_a_t_i_o_ns|length }}</h4>
+
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-globe"></i>
+                        <h4><span>Territory:</span><br>275.400 KM<em>2</em></h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-home"></i>
+                        <h4><span>AVG Price:</span><br>$946.000</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <div class="main-button">
+                          <a href="about.html">Explore More</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav>
+          <div class="controls">
+            <label for="banner1"><span class="progressbar"><span class="progressbar-fill"></span></span><span
+                class="text">1</span></label>
+
+          </div>
+        </nav>
+      </div>
+  </section>
+  <div class="d-flex"  >
+            <div class="col-md-12 mx-auto">
+        {# <div class="small fw-light">search input with icon</div> #}
+        <div class="input-group">
+        <input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
+        <span class="input-group-append">
+            <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill ms-n5" type="button" id="searchButton">
+                Search
+            </button>
+        </span>
+        </div>
+    </div>
+</div>
+  <!-- * Main Banner Area End * -->
+
+<!-- Ajoutez cet élément pour afficher le nombre total des publications -->
+
+<!-- Votre code HTML pour la boucle de publication -->
+<div class="container">
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      {% for p_u_b_l_i_c_a_t_i_o_n in p_u_b_l_i_c_a_t_i_o_ns %}
+      <div class="user-row">
+        <div class="border-button mb-3 p-3">
+          <div class="publication-content">
+            <p class="username"><strong>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</strong></p>
+            <p class="date">{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</p>
+            <p class="content">{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</p>
+           <button class="like-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}"><i class="fas fa-thumbs-up"></i></button>
+           <span class="like-count">{{ p_u_b_l_i_c_a_t_i_o_n.likes }}</span>
+
+<button class="dislike-btn" data-publication-id="{{ p_u_b_l_i_c_a_t_i_o_n.id }}"><i class="fas fa-thumbs-down"></i></button>
+
+
+
+            <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_edit', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}">Edit</a>
+            <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_showw', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}" class="btn btn-primary">Comment</a>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <p>No publications found.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Scripts JavaScript -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('.like-btn').click(function() {
+        var publicationId = $(this).data('publication-id');
+         var likeButton = $(this); // Stockez une référence au bouton Like
+
+        $.ajax({
+            type: 'POST',
+        url: '{{ path('like', {'id': '__publicationId__'}) }}'.replace('__publicationId__', publicationId),
+            success: function(response) {
+                console.log(response);
+                // Rafraîchir la page ou effectuer toute autre action après le like
+                var likeCountElement = likeButton.next('.like-count'); // Utilisez la variable likeButton ici
+                var currentLikes = parseInt(likeCountElement.text());
+                likeCountElement.text(currentLikes + 1);
+            }
+        });
+    });
+
+        $('.dislike-btn').click(function() {
+            var publicationId = $(this).data('publication-id');
+              var dislikeButton = $(this); // Stockez une référence au bouton Dislike
+
+            $.ajax({
+                type: 'POST',
+        url: '{{ path('dislike', {'id': '__publicationId__'}) }}'.replace('__publicationId__', publicationId),
+                success: function(response) {
+                    console.log(response);
+                    // Rafraîchir la page ou effectuer toute autre action après le dislike
+                   var dislikeCountElement = dislikeButton.siblings('.dislike-count'); // Utilisez la classe dislike-count pour sélectionner l'élément du nombre de dislikes
+            var currentDislikes = parseInt(dislikeCountElement.text());
+            dislikeCountElement.text(response.dislikes);
+            
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Ajoutez cet élément pour afficher le nombre total des publications -->
+<div id="totalPublications"></div>
+
+<script>
+$(document).ready(function () {
+    $('#searchButton').click(function () {
+        var searchQuery = $('#example-search-input').val().toLowerCase();
+        var totalPublications = 0; // Initialise le compteur du nombre total des publications
+
+        // Loop through each publication-content div and show/hide based on the search query
+        $('.publication-content').each(function () {
+            var publicationContentText = $(this).find('.content').text().toLowerCase();
+
+            // If the search query is found in the publication content, show it; otherwise, hide it
+            var isMatching = publicationContentText.includes(searchQuery);
+            $(this).toggle(isMatching);
+            
+            // Incrémente le compteur du nombre total des publications si la publication correspond
+            if (isMatching) {
+                totalPublications++;
+            }
+        });
+
+        // Met à jour le nombre total des publications affichées
+        $('#totalPublications').text("Total Publications: " + totalPublications);
+    });
+});
+</script>
+
+
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <br> <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> <a
+            href="https://themewagon.com "target="_blank">ThemeWagon</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  {% block js %}
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+
+  <script src="{{asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
+ 
+  <script src="{{asset('assets/js/tabs.js')}}"></script>
+  <script src="{{asset('assets/js/popup.js')}}"></script>
+  <script src="{{asset('assets/js/custom.js')}}"></script>
+  {% endblock %}
+  <script>
+    function bannerSwitcher() {
+      next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
+      if (next.length) next.prop('checked', true);
+      else $('.sec-1-input').first().prop('checked', true);
+    }
+
+    var bannerTimer = setInterval(bannerSwitcher, 5000);
+
+    $('nav .controls label').click(function () {
+      clearInterval(bannerTimer);
+      bannerTimer = setInterval(bannerSwitcher, 5000)
+    });
+
+  </script>
+{% else %}
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Erreur</title>
+        </head>
+        <body>
+            <h1>You have to be an Admin</h1>
+            <p>
+                You will redirect to the Home page in 6 seconds
+            </p>
+            <script>
+                setTimeout(function(){
+                    window.location.href = "{{ path('/') }}";
+                }, 6000);
+            </script>
+        </body>
+        </html>
+    {% endif %}
+{% else %}
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Erreur</title>
+    </head>
+    <body>
+        <h1>You have to LOGIN</h1>
+        <p>
+            You will redirect to the Home page in 6 seconds
+        </p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "{{ path('app_home_front') }}";
+            }, 6000);
+        </script>
+    </body>
+    </html>
+{% endif %}
+</body>
+{% endblock %}
+
+</html>

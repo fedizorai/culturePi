@@ -1,0 +1,63 @@
+{% extends './dashboard/base.html.twig' %}
+
+{% block title %}MODIFIER L'ÉVÉNEMENT{% endblock %}
+
+{% block navbar %}
+    <!-- Votre contenu de la barre de navigation va ici -->
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="text-center mb-4">
+        <h1 class="title-heading">
+            <i class="fa fa-map"></i> Mise à Jour de l'Événement
+        </h1>
+    </div>
+
+    {# Commencer le rendu du formulaire #}
+    {{ form_start(form, {attr: {'class': 'reservation-form'}}) }}
+
+    {# Champ de formulaire pour 'nomEvent' avec libellé et élément d'entrée #}
+    <div class="form-group mb-3">
+        {{ form_label(form.nomEvent) }}
+        {{ form_widget(form.nomEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {# Champ de formulaire pour 'maxPlacesEvent' avec libellé et élément d'entrée #}
+    <div class="form-group mb-3">
+        {{ form_label(form.maxPlacesEvent) }}
+        {{ form_widget(form.maxPlacesEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {# Champ de formulaire pour 'dateEvent' avec libellé et élément d'entrée #}
+    <div class="form-group mb-3">
+        {{ form_label(form.dateEvent) }}
+        {{ form_widget(form.dateEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {# Champ de formulaire pour 'lieuEvent' avec libellé et élément d'entrée #}
+    <div class="form-group mb-3">
+        {{ form_label(form.lieuEvent) }}
+        {{ form_widget(form.lieuEvent, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+     <div class="col-md-6">
+        <div class="mb-3">
+            {{ form_label(form.categorie, 'Catégories', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.categorie) is not empty %}
+                <div class="text-danger">{{ form_errors(form.categorie) }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="text-center">
+        <fieldset class="border-button rounded-circle p-3">
+            <button type="submit" class="btn btn-primary btn-lg">Mettre à Jour l'Événement</button>
+        </fieldset>
+    </div>
+
+    {# Fin du rendu du formulaire #}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

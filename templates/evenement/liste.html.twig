@@ -1,0 +1,121 @@
+ {% extends 'dashboard/base.html.twig' %}
+
+{% block title %}LIST DES EVENEMENTS{% endblock %}
+
+
+
+{% block navbar %}
+<!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+   
+      <!-- Sidebar scroll-->
+   <div class="brand-logo d-flex align-items-center justify-content-between">
+      <a href="#" class="text-nowrap logo-img">
+        <img src="{{ asset("assetsFB/images/logos/dark-logo.png") }}" width="180" alt=""/>
+      </a>
+      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+        <i class="ti ti-x fs-8"></i>
+      </div>
+    </div>
+
+   <div>
+   
+   
+  
+ <div class="d-flex justify-content-end">
+        <div class="message-body">
+          <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+            <i class="ti ti-user fs-6"></i>
+            <p class="mb-0 fs-3">FEDI</p>
+          </a>
+          <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+            <i class="ti ti-mail fs-6"></i>
+            <p class="mb-0 fs-3">Gestion Des Evenments</p>
+          </a>
+        </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block body %}
+
+   
+   <body style="background-color: #96E5F8;">
+
+ <div class="container">
+        <div class="row">
+
+            {% for evenement in evenements %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('assets/images/deals-01.jpg') }}" class="card-img-top" alt="Event Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ evenement.nomEvent }}</h5>
+                            <p class="card-text">{{ evenement.lieuEvent }}</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-clock"></i> {{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</li>
+                                <li><i class="fa fa-map"></i> {{ evenement.maxPlacesEvent }}</li>
+                            </ul>
+                            <div class="main-button">
+                                {{ include('evenement/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <p>No events found</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+     
+   
+                <!-- Yearly Breakup -->
+                <div class="card overflow-hidden">
+                  <div class="card-body p-4">
+                    <h5 class="card-title mb-9 fw-semibold">les evenements en cours ..</h5>
+                    <div class="row align-items-center">
+                      <div class="col-8">
+                        <h4 class="fw-semibold mb-3">$36,358</h4>
+                        <div class="d-flex align-items-center mb-3">
+                          <span
+                            class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-arrow-up-left text-success"></i>
+                          </span>
+                          <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                          <p class="fs-3 mb-0">last year</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <div class="me-4">
+                            <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
+                            <span class="fs-2">2023</span>
+                          </div>
+                          <div>
+                            <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
+                            <span class="fs-2">2023</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                          <div id="breakup"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               
+              </body>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <!--  {{ include('evenement/PdfEvenement.html.twig') }}' -->

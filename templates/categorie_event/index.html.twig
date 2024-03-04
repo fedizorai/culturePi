@@ -1,0 +1,218 @@
+{% extends './dashboard/base.html.twig' %}
+
+{% block title %}CategorieEvent index{% endblock %}
+
+{% block body %}
+  
+<div class="col-lg-8 d-flex align-items-stretch">
+    <div class="card w-100">
+        <div class="card-body p-4">
+            <h5 class="card-title fw-bold mb-4 text-center">Les Catégories</h5>
+
+            <div class="d-flex justify-content-between mb-4">
+                <a href="{{ path('app_categorie_event_new') }}" class="btn btn-success">New Category</a>
+            </div>
+
+            <div>
+                <table class="table table-striped table-hover">
+                    <thead class="bg-primary text-light">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nom Catégorie</th>
+                            <th scope="col">Description Catégorie</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categorie_event in categorie_events %}
+                            <tr>
+                                <td>{{ categorie_event.id }}</td>
+                                <td>{{ categorie_event.nom }}</td>
+                                <td>{{ categorie_event.descriptionCategorieEvent }}</td>
+                                <td>
+                                     <a href="{{ path('app_categorie_event_edit', {'id': categorie_event.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{ path('app_categorie_event_show', {'id': categorie_event.id}) }}" class="btn btn-info btn-sm">Show</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Pas des Categories disponibles pour le moment</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-lg-8 d-flex align-items-stretch">
+    <div class="card w-100">
+        <div class="card-body p-4">
+            <h5 class="card-title fw-semibold mb-4 text-center">Liste Des Événements</h5>
+               <div class="d-flex justify-content-between mb-4">
+                <a href="{{ path('generator_service') }}" class="btn btn-success">PDF</a>
+                <a href="{{ path('app_event_export_excel') }}" class="btn btn-success">Excel</a>
+                <a href="{{ path('app_stats') }}" class="btn btn-success">Statistique</a>
+            </div>
+<div class="d-flex"  >
+            <div class="col-md-12 mx-auto">
+        {# <div class="small fw-light">search input with icon</div> #}
+        <div class="input-group">
+        <input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
+        <span class="input-group-append">
+            <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill ms-n5" type="button" id="searchButton">
+                Search
+            </button>
+        </span>
+        </div>
+    </div>
+</div>
+
+                    
+
+                        
+                        
+
+                         
+           
+
+            <div>
+                <table class="table table-striped table-hover">
+                    <thead class="bg-primary text-light">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nom Événement</th>
+                            <th scope="col">Lieu Événement</th>
+                            <th scope="col">Date Événement</th>
+                            <th scope="col">Max Places</th>
+                            <th scope="col">Nom Catégorie</th>
+                            <th scope="col">Actions</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                            <tr class="user-row">
+                                <td>{{ event.id }}</td>
+                                <td>{{ event.nomEvent }}</td>
+                                <td>{{ event.lieuEvent }}</td>
+                                <td>{{ event.dateEvent ? event.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ event.maxPlacesEvent }}</td>
+                                <td>{{ event.categorie }}</td>
+                                <td>
+                                    {{ include('categorie_event/_deletee_form.html.twig', {'button_text': 'photo corbeille'}) }}
+
+                                    <div class="btn btn-info mr-2">
+        <a class="text-light" href="{{ path('app_evenement_edit', {'id': event.id}) }}">Edit</a></div>
+                                </td>
+
+                        
+ 
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">Pas d'événements disponibles pour le moment</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+
+ $(document).ready(function () {
+            $('#searchButton').click(function () {
+                var searchQuery = $('#example-search-input').val().toLowerCase();
+                var noUsersRow = $('#noUsersRow');
+    
+                // Loop through each user row and show/hide based on the search query
+                $('.user-row').each(function () {
+                    var userRowText = $(this).text().toLowerCase();
+    
+                    // If the search query is found in the user row, show it; otherwise, hide it
+                    $(this).toggle(userRowText.includes(searchQuery));
+                });
+    
+                // Show/hide the "No Users Found" row based on search results
+                noUsersRow.toggle($('.user-row:visible').length === 0);
+            });
+        });
+</script>
+
+            </div>
+            <div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="col-lg-8 d-flex align-items-stretch">
+    <div class="card w-100">
+        <div class="card-body p-4">
+            <h5 class="card-title fw-semibold mb-4 text-center"> Calendar </h5>
+
+    <div class="d-flex justify-content-between mb-4">
+                <a href="{{ path('app_calendar_new') }}" class="btn btn-success">New Event</a>
+            </div>
+
+     <table class="table table-striped table-hover">
+                    <thead class="bg-primary text-light">
+                        <tr>
+                <th>Id EventC</th>
+                <th>Titre</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>Description</th>
+                <th>All Day</th>
+                <th>Background Color</th>
+                <th>Border Color</th>
+                <th>Text Color</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.title }}</td>
+                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.description }}</td>
+                <td>{{ calendar.allDay ? 'Yes' : 'No' }}</td>
+                <td>{{ calendar.backgroundColor }}</td>
+                <td>{{ calendar.borderColor }}</td>
+                <td>{{ calendar.textColor }}</td>
+                <td>
+                                    <a href="{{ path('app_calendar_edit', {'id': calendar.id}) }}"class="btn btn-warning btn-sm" >Edit</a>
+                    <a href="{{ path('app_calendar_show', {'id': calendar.id}) }}" class="btn btn-info btn-sm" >Show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">No Events By Admin</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+
+</div>
+            <div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,44 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+   <div class="text-center mb-4">
+    <h1 class="display-inline-block px-4 border rounded">
+        <i class="fa fa-map"></i> Evenement Details
+    </h1>
+   </div>
+
+   <div class="reservation-form">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">Nom Evenement</th>
+                <td>{{ evenement.nomEvent }}</td>
+            </tr>
+            <tr>
+                <th scope="row">MaxPlaces</th>
+                <td>{{ evenement.maxPlacesEvent }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Date</th>
+                <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Lieut</th>
+                <td>{{ evenement.lieuEvent }}</td>
+            </tr>
+        </tbody>
+    </table>
+   </div>
+
+   <div class="text-center">
+    <div class="btn btn-secondary mr-2">
+        <a class="text-light" href="{{ path('app_evenement_index') }}">Back to List</a>
+    </div>
+
+    
+
+   </div>
+
+{% endblock %}

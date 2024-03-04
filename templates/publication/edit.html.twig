@@ -1,0 +1,162 @@
+
+
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  {% block title %}
+  <title>Culture vibes</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
+  {% endblock %}
+  {% block css %}
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/templatemo-woox-travel.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <style>
+    .publication-content {
+      background-color: #f2f3f5; /* Couleur de fond pour le cadre */
+      border: 1px solid #ccc;
+      border-radius: 5px; /* Coins arrondis pour le cadre */
+      padding: 15px; /* Ajoute de l'espace intérieur */
+      margin-bottom: 20px; /* Ajoute de l'espace en bas */
+    }
+
+    .publication-content p {
+      margin-bottom: 10px; /* Ajoute de l'espace entre les paragraphes */
+    }
+
+    .publication-content a {
+      color: #385898; /* Couleur du lien */
+      text-decoration: none; /* Supprime le soulignement du lien */
+      font-weight: bold; /* Rend le texte en gras */
+    }
+
+    .publication-content a:hover {
+      text-decoration: underline; /* Souligne le lien au survol */
+    }
+    .username {
+    font-size: 18px; /* Taille de police plus petite pour le nom d'utilisateur */
+  }
+
+  .date {
+    font-size: 14px; /* Taille de police plus petite pour la date */
+  }
+
+  .content {
+    font-size: 20px; /* Taille de police plus grande pour le contenu */
+  }
+  .like-btn,
+.dislike-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px; /* Ajustez la taille de police selon vos besoins */
+    color: #000; /* Couleur des icônes */
+}
+
+.like-btn:hover,
+.dislike-btn:hover {
+    color: #00f; /* Couleur au survol */
+}
+.like-count {
+    color: black;
+}
+
+
+  </style>
+  {% endblock %}
+  <!--
+
+TemplateMo 580 Woox Travel
+
+https://templatemo.com/tm-580-woox-travel
+
+-->
+
+</head>
+
+
+ <!-- * Header Area Start * -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                       
+                        <ul class="nav">
+                            <li><a href="{{ path('app_testt') }}" class="active">Review</a></li>
+                        </ul>
+                       
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- * Header Area End * -->
+    <!-- * Main Banner Area Start * -->
+    <section id="section-1">
+        <div class="content-slider">
+            <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
+
+            <div class="slider">
+                <div id="top-banner-1" class="banner">
+                    <div class="banner-inner-wrapper header-text">
+                        <div class="main-caption">
+                            <h2></h2>
+                            <h1>Update your own post</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- * Main Banner Area End * -->
+
+    <!-- * update Publication Area Start * -->
+    <div style="margin: 50px auto; max-width: 600px; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center;">Update your Publication</h1>
+
+        <div style="margin-top: 20px;">
+            {% include 'publication/_form.html.twig' %}
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <form action="{{ path('app_testt') }}" method="get">
+                <button type="submit" style="text-decoration: none; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px;">Back to list</button>
+            </form>
+        </div>
+    </div>
+    <!-- * update Publication Area End * -->
+     <!-- * Delete Publication Area Start * -->
+    <div style="margin: 50px auto; max-width: 600px; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center;">Delete your Publication</h1>
+
+        <div style="margin-top: 20px;">
+            {{ include('publication/_delete_form.html.twig') }}
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <!-- Add any additional content or buttons related to the delete functionality here -->
+        </div>
+    </div>
+    <!-- * Delete Publication Area End * -->
+     <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <br> <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> <a
+                        href="https://themewagon.com target="_blank">ThemeWagon</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>

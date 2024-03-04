@@ -15,7 +15,8 @@
       
     {% endblock %}
 </head>
-
+{% if app.user %}
+   {% if 'ROLE_ADMIN' in app.user.roles  %}
 <body>
 
   {% block navbar %}
@@ -55,7 +56,7 @@
               <span class="hide-menu">UI COMPONENTS</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="{{ path('app_voyage_showbe') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
@@ -63,7 +64,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="{{ path('app_categorie_event_index') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
@@ -79,7 +80,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="{{ path('app_dashboardd') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
@@ -87,7 +88,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="{{ path('app_admin_user_index') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-typography"></i>
                 </span>
@@ -99,19 +100,19 @@
               <span class="hide-menu">AUTH</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="{{ path('app_logout') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                <span class="hide-menu">Login</span>
+                <span class="hide-menu">Log-out</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="#" aria-expanded="false">
+              <a class="sidebar-link" href="{{ path('app_profile_show') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-user-plus"></i>
                 </span>
-                <span class="hide-menu">Register</span>
+                <span class="hide-menu">Profile</span>
               </a>
             </li>
             <li class="nav-small-cap">
@@ -481,5 +482,46 @@
         <script src="{{ asset('assetsFB/libs/simplebar/dist/simplebar.js') }}"></script>
         <script src="{{ asset('assetsFB/js/dashboard.js') }}"></script>
 </body>
-
+{% else %}
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Erreur</title>
+        </head>
+        <body>
+        <h1>You have to be an Admin</h1>
+        <p>
+            You will redirect to the Home page in 6 seconds
+        </p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "{{ path('/') }}";
+            }, 6000);
+        </script>
+        </body>
+        </html>
+    {% endif %}
+    {% else %}
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Erreur</title>
+        </head>
+        <body>
+        <h1>You have to LOGIN</h1>
+        <p>
+            You will redirect to the Home page in 6 seconds
+        </p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "{{ path('app_home_front') }}";
+            }, 6000);
+        </script>
+        </body>
+        </html>
+    {% endif %}
 </html>

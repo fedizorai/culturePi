@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation PDF</title>
+    <style>
+        /* Define your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #1e88e5; /* Blue color */
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 200px; /* Adjust as needed */
+        }
+        .reservation-details {
+            margin-bottom: 20px;
+        }
+        .reservation-details h2 {
+            color: #009688; /* Teal color */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .reservation-details p {
+            color: #757575; /* Gray color */
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .reservation-image {
+            text-align: center;
+        }
+        .reservation-image img {
+            max-width: 400px; /* Adjust as needed */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Reservation Details</h1>
+        </div>
+        <div class="reservation-details">
+            <h2>Reservation ID: <span style="color: #d32f2f;">{{ reservation.id }}</span></h2>
+            <p><strong>Number of Tickets:</strong> <span style="color: #689f38;">{{ reservation.nbrtickets }}</span></p>
+            <p><strong>User ID:</strong> <span style="color: #fbc02d;">{{ reservation.iduser }}</span></p>
+            <p><strong>Payment:</strong> <span style="color: #d81b60;">{{ reservation.paiement }}</span></p>
+            <p><strong>Voyage Title:</strong> <span style="color: #0288d1;">{{ reservation.voyage.title }}</span></p>
+            <p><strong>Voyage location:</strong> <span style="color: #0288d1;">{{ reservation.voyage.location }}</span></p>
+            <p><strong>Voyage duration:</strong> <span style="color: #0288d1;">{{ reservation.voyage.duration }}</span></p>
+
+        </div>
+
+    </div>
+</body>
+</html>

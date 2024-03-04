@@ -1,0 +1,10 @@
+<div class="text-center">
+    <form method="post" action="{{ path('app_evenement_deletee', {'id': event.id}) }}" onsubmit="return confirm('Vous voulez supprimer cet evenement?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+        <fieldset class="border-button rounded-circle p-3 mt-3">
+            <button type="submit" class="btn btn-danger btn-lg">
+                <img src="{{ asset('assetsFB/images/logos/corbeille.png') }}" alt="Corbeille" style="width: 25px; height: auto;">
+            </button>
+        </fieldset>
+    </form>
+</div>

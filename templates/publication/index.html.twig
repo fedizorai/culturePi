@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PUBLICATION index{% endblock %}
+
+{% block body %}
+    <h1>PUBLICATION </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CONTENUPUB</th>
+                <th>DATEPUB</th>
+                <th>USERNAME</th>
+                <th>USERID</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p_u_b_l_i_c_a_t_i_o_n in p_u_b_l_i_c_a_t_i_o_ns %}
+            <tr>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.id }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</td>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERID }}</td>
+                <td>
+                    <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_show', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}">show</a>
+                    <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_edit', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_new') }}">Create new</a>
+{% endblock %}

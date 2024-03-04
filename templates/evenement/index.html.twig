@@ -1,0 +1,241 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block navbar %}
+ {% if app.user %}
+
+  {% if app.user.access == 1 %}
+                                <script>
+                                    window.location.href = "{{ path('app_ban') }}";
+                                </script>
+
+                            {% endif %}
+                           {% endif %}
+                    
+                    <ul class="nav">
+                        
+                        <li><a href="{{ path('app_home_front') }}" >Home</a></li>
+                        <li><a href="{{ path('app_voyage_index') }}">Voyage</a></li>
+                        <li><a href="#" class="active">Evenement</a></li>
+                        <li><a href="#">Hebergement</a></li>
+                        <li><a href="{{ path('app_testt') }}">Review</a></li>
+                         {% if app.user %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" id="profileDropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+            <ul class="dropdown-menu" id="profileMenu">
+                <li><a href="{{ path('app_profile_show') }}"  style="color: black;">Profile</a></li>
+                <li><a href="{{ path('app_logout') }}"  style="color: black;">Logout</a></li>
+            </ul>
+        </li>
+    {% else %}
+        <li><a href="{{ path('app_login') }}">Login</a></li>
+    {% endif %}
+                    </ul>   
+                   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const profileDropdown = document.getElementById('profileDropdown');
+        const profileMenu = document.getElementById('profileMenu');
+
+        profileDropdown.addEventListener('mouseenter', function() {
+            profileMenu.style.display = 'block';
+        });
+
+        profileMenu.addEventListener('mouseleave', function() {
+            profileMenu.style.display = 'none';
+        });
+    });
+</script>  
+    
+{% endblock %}
+
+{% block body %}
+
+
+ <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                    </ol>
+                </nav>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <form name="Search-method" id="Search-method" method="post" class="search-form" style="display: flex; margin-top: 18px;">
+                                <div class="form-group col-md-5">
+                                    <label style="margin-top: 11px;margin-left: 10px;margin-right: 14px;padding-bottom: 7px;">Option Recherche</label>
+                                    <select name="optionsearch" class="js-example-basic-single search-select">
+                                        <option value="">Choisi un Critére</option>
+                                        <option value="nomEvent">Nom Evenement</option>
+                                        <option value="lieuEvent">Lieu Evenement</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-7">
+                                    <div class="input-group">
+                                        <input name="Search" type="text" class="form-control" placeholder="Search Events" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm btn-primary" type="Submit">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div style="border: 1px solid black; padding: 10px; width: 850px; margin: auto; text-align: center;">
+    <div class="filter-options">
+        <form method="post" class="search-form" style="margin-right: -42px;">
+            <div class="form-group col-md-4" style="display: flex; justify-content: center; align-items: center; margin: 0px!important;">
+                <div class="form-check" style="margin-right: 20px;">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="nomEvent">Nom
+                    </label>
+                </div>
+                <div class="form-check" style="margin-right: 20px;">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="lieuEvent">Lieu
+                    </label>
+                </div>
+                <div class="form-check" style="margin-right: 10px;">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="dateEvent">Date
+                    </label>
+                </div>
+ 
+                <div>
+                
+                                <button type="Submit" class="btn btn-sm btn-primary">Sort</button>
+
+                </div>
+                
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+            
+            </div>
+        </div>
+    </div>
+<div class="amazing-deals">
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+            <div class="section-heading text-center">
+                <h2>LES EVENMENETS </h2>
+                <p>Bienvenue sur notre site dédié à la richesse culturelle et touristique qui émerveille les voyageurs du monde entier.</p>
+            </div>
+            
+            </div>
+            
+{% for evenement in evenements %}
+
+
+    {# List of available images #}
+    {% set imageList = [
+        'deals-01.jpg',
+        'deals-02.jpg',
+        'deals-03.jpg',
+    
+    ] %}
+            <div class="col-lg-6 col-sm-6">
+            <div class="item">
+                <div class="row">
+                <div class="col-lg-6">
+                   <div class="image">
+    {# List of available images #}
+    {% set imageList = [
+        'deals-01.jpg',
+        'deals-02.jpg',
+        'deals-03.jpg',
+    
+    ] %}
+
+    {# Get a random index from the array #}
+    {% set randomIndex = random(0, imageList|length - 1) %}
+
+    {# Get the random image filename #}
+    {% set randomImage = imageList[randomIndex] %}
+
+    {# Display the image using the random filename #}
+    <img src="{{ asset('assets/images/' ~ randomImage) }}" alt="">
+</div>
+
+                </div>
+                <div class="col-lg-6 align-self-center">
+                    <div class="content">
+                    <span class="info"> {{ evenement.categorie }}</span>
+                    <h4>{{ evenement.nomEvent }}</h4>
+                    <div class="row">
+                        <div class="col-6">
+                        <i class="fa fa-clock"></i>
+                        <span class="list">{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</span>
+                        </div>
+                        <div class="col-6">
+                        <i class="fa fa-map"></i>
+                        <span class="list">{{ evenement.maxPlacesEvent }}</span>
+                        </div>
+                    </div>
+                    <p>{{ evenement.lieuEvent }}</p>
+                    <div class="main-button">
+                        <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">Show Evenement</a>
+                    </div>
+
+                    
+                    
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+              {% else %}
+    <tr>
+        <td colspan="6">
+            <div class="notification">
+                Pas Des Evenements Disponible ....
+            </div>
+        </td>
+    </tr>
+
+        {% endfor %}
+
+
+        </div>
+    </div>
+    </div>
+   <div class="text-center">
+    <div class="border-button">
+        <a href="{{ path('app_evenement_new') }}">Ajouter Evenement</a>
+       
+                        <p><a href="{{ path('main') }}">calander</a></p>
+    </div>
+
+   
+</div>
+
+
+        
+<footer>
+    <div class="container">
+      <div class="row">
+
+      </div>
+    </div>
+  </footer>
+  
+              
+
+    
+{% endblock %}

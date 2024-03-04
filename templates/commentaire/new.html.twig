@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New COMMENTAIRE{% endblock %}
+
+{% block body %}
+    <h1>Create new COMMENTAIRE</h1>
+
+    {{ include('commentaire/_form.html.twig') }}
+
+    <a href="{{ path('app_c_o_m_m_e_n_t_a_i_r_e_index') }}">back to list</a>
+{% endblock %}

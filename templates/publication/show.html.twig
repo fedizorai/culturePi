@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PUBLICATION{% endblock %}
+
+{% block body %}
+{% if app.user %}
+    {% if 'ROLE_USER' in app.user.roles  %}
+    <h1>PUBLICATION</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.id }}</td>
+            </tr>
+            <tr>
+                <th>CONTENUPUB</th>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.CONTENUPUB }}</td>
+            </tr>
+            <tr>
+                <th>DATEPUB</th>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.DATEPUB ? p_u_b_l_i_c_a_t_i_o_n.DATEPUB|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>USERNAME</th>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERNAME }}</td>
+            </tr>
+            <tr>
+                <th>USERID</th>
+                <td>{{ p_u_b_l_i_c_a_t_i_o_n.USERID }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_index') }}">back to list</a>
+
+    <a href="{{ path('app_p_u_b_l_i_c_a_t_i_o_n_edit', {'id': p_u_b_l_i_c_a_t_i_o_n.id}) }}">edit</a>
+
+    {{ include('publication/_delete_form.html.twig') }}
+    {% else %}
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Erreur</title>
+        </head>
+        <body>
+            <h1>You have to be an Admin</h1>
+            <p>
+                You will redirect to the Home page in 6 seconds
+            </p>
+            <script>
+                setTimeout(function(){
+                    window.location.href = "{{ path('/') }}";
+                }, 6000);
+            </script>
+        </body>
+        </html>
+    {% endif %}
+{% else %}
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Erreur</title>
+    </head>
+    <body>
+        <h1>You have to LOGIN</h1>
+        <p>
+            You will redirect to the Home page in 6 seconds
+        </p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "{{ path('app_home_front') }}";
+            }, 6000);
+        </script>
+    </body>
+    </html>
+{% endif %}
+{% endblock %}

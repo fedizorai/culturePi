@@ -1,0 +1,55 @@
+{% extends './dashboard/base.html.twig' %}
+
+{% block title %}Calendar Details{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    
+    <table class="table table-striped table-hover">
+        <tbody>
+            <tr>
+                <th scope="row">ID</th>
+                <td>{{ calendar.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Title</th>
+                <td>{{ calendar.title }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Start Time</th>
+                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : 'Not specified' }}</td>
+            </tr>
+            <tr>
+                <th scope="row">End Time</th>
+                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : 'Not specified' }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                <td>{{ calendar.description }}</td>
+            </tr>
+            <tr>
+                <th scope="row">All Day Event</th>
+                <td>{{ calendar.allDay ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Background Color</th>
+                <td>{{ calendar.backgroundColor }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Border Color</th>
+                <td>{{ calendar.borderColor }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Text Color</th>
+                <td>{{ calendar.textColor }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center mt-4">
+        <a href="{{ path('app_categorie_event_index') }}" class="btn btn-secondary">Back to List</a>
+    </div>
+
+
+    
+{% endblock %}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Culture Vibes!</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/assetsFB/images/logos/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('/assetsFB/css/styles.css') }}" />
+    <style>
+        /* Custom styles for the form */
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            background-color: #fff; /* Changed to white */
+            color: #000; /* Changed text color to black */
+            padding-top: 20px;
+        }
+
+        .sidebar-brand {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sidebar-nav {
+            margin-top: 20px;
+            padding-left: 0;
+        }
+
+        .sidebar-item {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px 20px;
+            color: #000; /* Changed text color to black */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-link:hover {
+            background-color: #f0f0f0; /* Light gray on hover */
+        }
+
+        .sidebar-link .icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+        <!-- Sidebar Start -->
+        <aside class="left-sidebar sidebar">
+            <div class="sidebar-brand">
+                <a href="./index.html" class="logo-img">
+                    <img src="../assetsFB/images/logos/dark-logo.png" width="180" alt="" />
+                </a>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="sidebar-item">
+                        <a href="./index.html" class="sidebar-link">
+                            <span class="icon ti ti-layout-dashboard"></span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <span class="icon ti ti-article"></span>
+                            Gestion Des Voyages
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="./ui-alerts.html" class="sidebar-link">
+                            <span class="icon ti ti-alert-circle"></span>
+                            Gestion des evenements
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="./ui-card.html" class="sidebar-link">
+                            <span class="icon ti ti-cards"></span>
+                            Gestion des hebergements
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="./ui-forms.html" class="sidebar-link">
+                            <span class="icon ti ti-file-description"></span>
+                            Gestion de forum
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ path('app_admin_user_index') }}" class="sidebar-link">
+                            <span class="icon ti ti-typography"></span>
+                            Gestion des utilisateurs
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ path('app_logout') }}" class="sidebar-link">
+                            <span class="icon ti ti-login"></span>
+                            Login
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ path('app_profile_show') }}" class="sidebar-link">
+                            <span class="icon ti ti-user-plus"></span>
+                            Profile
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </aside>
+        <!--  Sidebar End -->
+
+        <!-- Main Content -->
+        <div class="body-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="form-container">
+                            <h1 class="form-title">Create New User</h1>
+
+                            {# Include the form here #}
+                            {{ include('admin_user/_form.html.twig') }}
+
+                            <div class="text-center mt-3">
+                                <a href="{{ path('app_admin_user_index') }}" class="btn btn-secondary">Back to
+                                    list</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+    </div>
+    <!-- End Body Wrapper -->
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: right;
+        }
+        .logo {
+            text-align: center;
+        }
+        .logo img {
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+            border-radius: 50%; /* Add border radius for a circular shape */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+        }
+        .title {
+            text-align: center;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+       .center-image {
+    text-align: center; /* Center the content horizontally within the table cell */
+    padding: 500px; /* Add 5 pixels of padding around the content (adjust as needed) */
+}
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        Date et heure actuelles : {{ "now"|date('Y-m-d H:i') }}
+    </div>
+
+    <div class="logo">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="Description de votre image">
+    </div>
+
+{% block body %}
+
+    <div class="title">
+        <h1>LISTES DES EVENEMENTS</h1>
+    </div>
+ 
+    <div class="body">
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Lieu</th>
+                    <th>Date</th> 
+                    <th>Places Disponibles</th>
+                    <th>Categorie</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set imageList = [
+                    'deals-01.jpg',
+                    'deals-02.jpg',
+                    'deals-03.jpg',
+                ] %}
+                
+                {% for evenement in evenements %}
+                    {# Get a random index from the array #}
+                    {% set randomIndex = random(0, imageList|length - 1) %}
+
+                    {# Get the random image filename for each event #}
+                    {% set randomImage = imageList[randomIndex] %}
+
+                    <tr>
+                        <td class="center-image"><img src="{{ asset('assets/images/' ~ randomImage) }}"style=" width:50px; height:50px; " alt="Event Image"/></td>
+                        <td>{{ evenement.nomEvent }}</td>
+                        <td>{{ evenement.lieuEvent }}</td>
+                        <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ evenement.maxPlacesEvent }} places</td>
+                        <td>{{ evenement.categorie }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+{% endblock %}

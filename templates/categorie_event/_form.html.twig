@@ -1,0 +1,25 @@
+{{ form_start(form, {'attr': {'class': 'my-4 '}}) }}
+
+<div class="mb-3">
+    {{ form_label(form.nom, 'Nom Categorie Event', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+
+    {% if form_errors(form.nom) is not empty %}
+        <div class="text-danger">{{ form_errors(form.nom) }}</div>
+    {% endif %}
+</div>
+
+<div class="mb-3">
+    {{ form_label(form.descriptionCategorieEvent, 'Description Categorie Event', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.descriptionCategorieEvent, {'attr': {'class': 'form-control'}}) }}
+
+    {% if form_errors(form.descriptionCategorieEvent) is not empty %}
+        <div class="text-danger">{{ form_errors(form.descriptionCategorieEvent) }}</div>
+    {% endif %}
+</div>
+
+{{ form_widget(form) }}
+
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

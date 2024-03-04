@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Culture vibes</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/templatemo-woox-travel.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <!-- * Preloader Start * -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- * Preloader End * -->
+
+    <!-- * Header Area Start * -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                       
+                        <ul class="nav">
+                            <li><a href="{{ path('app_testt') }}" class="active">Review</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- * Header Area End * -->
+
+    <!-- * Main Banner Area Start * -->
+    <section id="section-1">
+        <div class="content-slider">
+            <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
+
+            <div class="slider">
+                <div id="top-banner-1" class="banner">
+                    <div class="banner-inner-wrapper header-text">
+                        <div class="main-caption">
+                            <h2></h2>
+                            <h1>Add your own post</h1>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- * Main Banner Area End * -->
+
+    <!-- * Create New Publication Area Start * -->
+    <div style="margin: 50px auto; max-width: 600px; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 1px solid #ddd;">
+    <h1 style="text-align: center; color: #4267B2; font-size: 24px;">Create new Publication</h1>
+
+    <div style="margin-top: 20px;">
+        {{ include('publication/_form.html.twig') }} {# Include the publication form here #}
+    </div>
+
+    <div style="text-align: right; margin-top: 20px;">
+       
+    </div>
+
+    <div style="text-align: left; margin-top: 20px;">
+        <a href="{{ path('app_testt') }}" style="text-decoration: none; background-color: transparent; color: #385898; padding: 10px 20px; border-radius: 5px; border: 1px solid #ddd;">Back to list</a>
+    </div>
+</div>
+
+    <!-- * Create New Publication Area End * -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <br> <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> <a
+                        href="https://themewagon.com target="_blank">ThemeWagon</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/isotope.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl-carousel.js') }}"></script>
+    <script src="{{ asset('assets/js/wow.js') }}"></script>
+    <script src="{{ asset('assets/js/tabs.js') }}"></script>
+    <script src="{{ asset('assets/js/popup.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <script>
+        function bannerSwitcher() {
+            next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
+            if (next.length) next.prop('checked', true);
+            else $('.sec-1-input').first().prop('checked', true);
+        }
+
+        var bannerTimer = setInterval(bannerSwitcher, 5000);
+
+        $('nav .controls label').click(function () {
+            clearInterval(bannerTimer);
+            bannerTimer = setInterval(bannerSwitcher, 5000)
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Ajouter un Evenement{% endblock %}
+ 
+{% block body %}
+{% if app.user %}
+    {% if 'ROLE_USER' in app.user.roles  %}
+   <div style="text-align: center; margin-bottom: 40px;">
+    <h1 style="display: inline-block; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        <i class="fa fa-map"></i> <em>"Inspirez, Partagez, Vivez la Culture!"</em>
+    </h1>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <h4 class="mb-4">Ajouter un événement</h4>
+  </div>
+</div>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'reservation-form'}}) }}
+    <div class="container">
+   <div class="row">
+    <div class="col-md-6">
+    
+        <div class="mb-3">
+            <fieldset>
+                {{ form_label(form.nomEvent, 'Nom de l\'événement', {'attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.nomEvent, {'attr': {'class': 'form-control'}}) }}
+            </fieldset>
+            {% if form_errors(form.nomEvent) is not empty %}
+                <div class="text-danger">{{ form_errors(form.nomEvent) }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mb-3">
+            {{ form_label(form.maxPlacesEvent, 'Nombre maximal de places', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.maxPlacesEvent, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.maxPlacesEvent) is not empty %}
+                <div class="text-danger">{{ form_errors(form.maxPlacesEvent) }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mb-3">
+            {{ form_label(form.dateEvent, 'Date de l\'événement', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateEvent, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.dateEvent) is not empty %}
+                <div class="text-danger">{{ form_errors(form.dateEvent) }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mb-3">
+            {{ form_label(form.lieuEvent, 'Lieu de l\'événement', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.lieuEvent, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.lieuEvent) is not empty %}
+                <div class="text-danger">{{ form_errors(form.lieuEvent) }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mb-3">
+            {{ form_label(form.categorie, 'Catégories', {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.categorie) is not empty %}
+                <div class="text-danger">{{ form_errors(form.categorie) }}</div>
+            {% endif %}
+        </div>
+    </div>
+    
+
+
+
+
+<div class="row justify-content-center">
+    <div class="col-md-4 text-center">
+        <button class="main-button">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
+
+{{ form_end(form) }}
+ {% else %}
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Erreur</title>
+        </head>
+        <body>
+            <h1>You have to be an Admin</h1>
+            <p>
+                You will redirect to the Home page in 6 seconds
+            </p>
+            <script>
+                setTimeout(function(){
+                    window.location.href = "{{ path('/') }}";
+                }, 6000);
+            </script>
+        </body>
+        </html>
+    {% endif %}
+{% else %}
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Erreur</title>
+    </head>
+    <body>
+        <h1>You have to LOGIN</h1>
+        <p>
+            You will redirect to the Home page in 6 seconds
+        </p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "{{ path('app_home_front') }}";
+            }, 6000);
+        </script>
+    </body>
+    </html>
+{% endif %}
+{% endblock %}
+
+
+ {% block css %}
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/templatemo-woox-travel.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    {% endblock %}

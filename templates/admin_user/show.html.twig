@@ -1,0 +1,55 @@
+{% extends './dashboard/base.html.twig' %}
+
+
+{% block title %}  {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">User Profile</div>
+
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                           <tr>
+                                <th>ID</th>
+                                <td>{{ user.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Is Verified</th>
+                                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Profile Image</th>
+                                <td>
+                                    <img src="{{ asset(user.ImagePath) }}" class="profile-image" alt="Profile Image">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" style="margin-top: 20px;"> <!-- Center the button -->
+        <div class="main-button">
+            <a href="{{ path('app_profile_edit') }}">Edit Profile</a>
+        </div>
+        
+    </div>
+</div>
+  <style>
+        /* Your custom CSS for the profile image */
+        .profile-image {
+            max-width: 150px; /* Adjust the maximum width of the profile image */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 50%; /* Apply border-radius for a circular profile image */
+        }
+    </style>
+{% endblock %}
